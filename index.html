@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>APPE 2026 - Asistente Personal para Estudiantes</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="students.js"></script>
+    <script src="curriculum.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#067ff9",
+                        "success": "#25f447",
+                        "accent-neon": "#39ff14",
+                        "vibrant-orange": "#ff6b00",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#080c10",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "heading": ["Bebas Neue", "cursive"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Custom Animations and Design Tokens */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-in-right {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(6, 127, 249, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(6, 127, 249, 0.4);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+
+        .animate-slide-in {
+            animation: slide-in-right 0.3s ease-out forwards;
+        }
+
+        .glow-primary {
+            animation: glow 3s infinite;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #080c10;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #067ff9;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(6, 127, 249, 0.1), transparent),
+                radial-gradient(circle at bottom left, rgba(57, 255, 20, 0.1), transparent);
+        }
+
+        /* Mobile Mockup Styles */
+        #viewport-wrapper {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        .pilot-mode #viewport-wrapper {
+            background: radial-gradient(circle at center, #1a1a1a, #000);
+            padding: 40px 0;
+        }
+
+        #device-frame {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: #080c10;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pilot-mode #device-frame {
+            width: 375px;
+            height: 812px;
+            min-height: 812px;
+            border: 12px solid #1a1a1a;
+            border-radius: 3.5rem;
+            box-shadow: 0 0 0 2px #333, 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .pilot-mode #device-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 1.5rem;
+            border-bottom-right-radius: 1.5rem;
+            z-index: 100;
+        }
+
+        #pilot-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #067ff9;
+            color: white;
+            padding: 12px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(6, 127, 249, 0.3);
+            display: none;
+        }
+
+        .pilot-mode #pilot-toggle-btn {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-slate-100 font-display transition-colors duration-300">
+    <div id="viewport-wrapper">
+        <div id="device-frame">
+            <div id="app" class="relative min-h-full w-full overflow-x-hidden">
+                <!-- Application content will be injected here -->
+                <div id="screen-container" class="animate-fade-in h-full w-full">
+                    <div class="flex items-center justify-center h-screen">
+                        <p class="text-slate-500 animate-pulse">Iniciando sistema APPE...</p>
+                    </div>
+                </div>
+
+                <!-- Global Loading Overlay -->
+                <div id="loading-overlay"
+                    class="fixed inset-0 z-[100] bg-background-dark flex items-center justify-center transition-opacity duration-500 pointer-events-none opacity-0">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin">
+                        </div>
+                        <p class="mt-4 text-primary font-bold tracking-widest uppercase text-xs">Sincronizando APPE...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Pilot Mode Toggle -->
+    <button id="pilot-toggle-btn" onclick="togglePilotMode()" title="Salir de Modo Piloto">
+        <span class="material-symbols-outlined">fullscreen</span>
+    </button>
+
+    <!-- Application Logic -->
+    <script>
+        /**
+         * APPE 2026 - Core Application Logic
+         */
+        const state = {
+            currentScreen: 'welcome',
+            role: 'student',
+            user: null,
+            loading: false,
+            pilotMode: false
+        };
+
+        const screens = {
+            welcome: {
+                title: "Bienvenido a APPE",
+                render: () => `
+                    <div class="relative flex h-screen w-full flex-col bg-background-dark overflow-hidden">
+                        <div class="absolute inset-0 w-full h-full z-0">
+                            <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-background-dark/80 z-10"></div>
+                            <div class="w-full h-full bg-center bg-no-repeat bg-cover opacity-60" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC2lV89FQ-xYLcTa5R1hWqri_wqXIRqBL67jy8a2i8aCxbDdii-_OrKV2SHOrCgSE6apdXti-LvrM9ItQgaIRiZwMYYHSFvOVezeLXWLiOKCtJ9xvYNOgN1W8r74pCFSzW1NDdTa3Cng38ZnU9fVPAOrr71g4P9AnGupKtcytpBUcARN4CnDGpO2sOXk-8IZYjrJHBxZ500EAj97NjRDqt8beeKlbn9uICI80Qe_NdMwg77qcRF6xJwWpeson78YVk9jenL_2zSH9A');"></div>
+                        </div>
+                        <div class="relative z-20 flex flex-col h-full justify-between px-6 pt-16 pb-12">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="mb-4 p-4 rounded-2xl bg-primary/20 backdrop-blur-md border border-primary/30 shadow-[0_0_20px_rgba(6,127,249,0.3)]">
+                                    <span class="material-symbols-outlined text-primary text-5xl">auto_stories</span>
+                                </div>
+                                <h1 class="text-white tracking-tighter text-[64px] font-heading leading-none mb-2 drop-shadow-[0_0_20px_rgba(6,127,249,0.5)]">APPE</h1>
+                                <div class="inline-block px-4 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                                    <h2 class="text-primary text-xs font-bold uppercase tracking-[0.2em]">Asistente Personal para Estudiantes</h2>
+                                </div>
+                            </div>
+                            <div class="w-full max-w-[480px] mx-auto flex flex-col items-center">
+                                <div class="mb-10 text-center">
+                                    <p class="text-white/90 text-xl font-medium leading-tight">Tu aliado 24/7 para conquistar tus <span class="text-success font-bold">metas académicas</span></p>
+                                </div>
+                                <div class="flex flex-col w-full gap-4">
+                                    <button onclick="navigateTo('activation')" class="group relative flex items-center justify-center overflow-hidden rounded-full h-16 bg-primary text-white text-lg font-bold tracking-[0.05em] w-full shadow-[0_0_25px_rgba(6,127,249,0.4)] transition-all active:scale-95">
+                                        <span class="relative z-10 flex items-center gap-2">COMENZAR LA MISIÓN <span class="material-symbols-outlined">rocket_launch</span></span>
+                                    </button>
+                                    <button onclick="togglePilotMode()" class="flex items-center justify-center rounded-full h-14 bg-success/10 hover:bg-success/20 text-success text-xs font-bold w-full border border-success/20 backdrop-blur-md transition-all gap-2">
+                                        <span class="material-symbols-outlined text-sm">smartphone</span>
+                                        <span>PREVISUALIZAR PILOTO MÓVIL</span>
+                                    </button>
+                                </div>
+                                <p class="mt-12 text-white/30 text-[10px] uppercase tracking-[0.3em] font-bold">Powered by Academic Intel v2.0</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            activation: {
+                title: "Activar Cuenta APPE",
+                render: () => {
+                    const grades = [...new Set(STUDENTS_DB.map(s => s.grade).filter(Boolean))].sort((a, b) => Number(a) - Number(b));
+                    return `
+                    <div class="flex flex-col min-h-screen" style="background: linear-gradient(135deg, #060d18 0%, #0a1628 50%, #060d18 100%);">
+                        <!-- Animated background orbs -->
+                        <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+                            <div style="position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(37,244,71,0.12) 0%,transparent 70%);"></div>
+                            <div style="position:absolute;bottom:100px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(6,127,249,0.10) 0%,transparent 70%);"></div>
+                        </div>
+
+                        <!-- Header -->
+                        <header class="relative z-10 px-5 pt-12 pb-5 flex items-center justify-between">
+                            <button onclick="navigateTo('welcome')"
+                                class="flex items-center gap-2 px-4 py-2 rounded-2xl transition-all active:scale-95 group"
+                                style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+                                <span class="material-symbols-outlined text-white text-xl">arrow_back_ios_new</span>
+                                <span class="text-white text-[10px] font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">Volver</span>
+                            </button>
+                            <div class="flex items-center gap-2 px-4 py-1.5 rounded-full" style="background:rgba(37,244,71,0.08);border:1px solid rgba(37,244,71,0.2);">
+                                <span class="material-symbols-outlined text-success text-base">verified_user</span>
+                                <span class="text-success text-[11px] font-bold uppercase tracking-widest">Activación Segura</span>
+                            </div>
+                            <div class="w-10"></div>
+                        </header>
+
+                        <!-- Hero section -->
+                        <div class="relative z-10 px-6 pt-2 pb-6 text-center">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4" style="background:linear-gradient(135deg,rgba(37,244,71,0.2),rgba(6,127,249,0.15));border:1px solid rgba(37,244,71,0.3);box-shadow:0 0 30px rgba(37,244,71,0.15);">
+                                <span class="material-symbols-outlined text-success text-3xl">rocket_launch</span>
+                            </div>
+                            <h1 class="text-3xl font-heading tracking-wider text-white mb-2">
+                                ¡BIENVENIDO A <span style="background:linear-gradient(90deg,#25f447,#06cbf9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">APPE</span>!
+                            </h1>
+                            <p class="text-slate-400 text-sm">Completa los pasos para activar tu cuenta</p>
+                        </div>
+
+                        <!-- Steps -->
+                        <main class="relative z-10 flex-1 px-4 pb-24 space-y-4 max-w-md mx-auto w-full">
+
+                            <!-- STEP 1: Grade -->
+                            <div class="rounded-3xl p-5" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black" style="background:linear-gradient(135deg,#25f447,#06cbf9);color:#060d18;">1</div>
+                                    <span class="text-white font-bold text-sm tracking-wide">Selecciona tu Grado</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    ${grades.map(g => `
+                                        <button id="act-grade-${g}" onclick="selectGradeForActivation('${g}')"
+                                            class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all active:scale-95"
+                                            style="background:rgba(255,255,255,0.05);color:#94a3b8;border:1px solid rgba(255,255,255,0.08);">
+                                            ${g}°
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- STEP 2: Name -->
+                            <div id="activation-name-section" class="rounded-3xl p-5 hidden" style="background:rgba(255,255,255,0.04);border:1px solid rgba(37,244,71,0.2);">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black" style="background:linear-gradient(135deg,#25f447,#06cbf9);color:#060d18;">2</div>
+                                    <span class="text-white font-bold text-sm tracking-wide">Selecciona tu Nombre</span>
+                                </div>
+                                <!-- Trigger -->
+                                <button type="button" id="name-dropdown-trigger" onclick="toggleNameDropdown()"
+                                    class="w-full h-12 px-4 rounded-2xl text-left flex items-center gap-3 transition-all active:scale-[0.98]"
+                                    style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);">
+                                    <span class="material-symbols-outlined text-success text-xl">person_search</span>
+                                    <span id="name-dropdown-label" class="text-slate-400 text-sm flex-1">-- Elige tu nombre --</span>
+                                    <span class="material-symbols-outlined text-slate-500 text-xl">expand_more</span>
+                                </button>
+                                <!-- Inline list -->
+                                <div id="name-dropdown-list" class="hidden mt-2 rounded-2xl overflow-y-auto" style="max-height:190px;background:rgba(10,22,40,0.95);border:1px solid rgba(255,255,255,0.08);">
+                                </div>
+                            </div>
+
+                            <!-- STEP 3: Code reveal -->
+                            <div id="activation-code-section" class="rounded-3xl p-5 hidden" style="background:rgba(37,244,71,0.05);border:1px solid rgba(37,244,71,0.25);box-shadow:0 0 20px rgba(37,244,71,0.08);">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black" style="background:linear-gradient(135deg,#25f447,#06cbf9);color:#060d18;">3</div>
+                                    <span class="text-white font-bold text-sm tracking-wide">Tu Código Institucional</span>
+                                </div>
+                                <div class="flex items-center gap-4 px-4 py-3 rounded-2xl" style="background:rgba(37,244,71,0.08);border:1px solid rgba(37,244,71,0.2);">
+                                    <span class="material-symbols-outlined text-success text-2xl">fingerprint</span>
+                                    <div>
+                                        <p class="text-[10px] text-success/60 uppercase tracking-widest mb-0.5">Código</p>
+                                        <p id="activation-code-display" class="text-success font-black font-mono text-xl tracking-widest">—</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-success/40 text-2xl ml-auto">check_circle</span>
+                                </div>
+                            </div>
+
+                            <!-- CTA Button -->
+                            <button id="activation-btn" onclick="doActivation()" disabled
+                                class="w-full h-14 rounded-2xl font-bold text-base transition-all flex items-center justify-center gap-3 mt-2 cursor-not-allowed"
+                                style="background:rgba(37,244,71,0.15);color:rgba(255,255,255,0.3);border:1px solid rgba(37,244,71,0.1);">
+                                <span class="material-symbols-outlined">rocket_launch</span>
+                                <span>Iniciar mi APPE</span>
+                            </button>
+
+                        </main>
+                    </div>`;
+                }
+            },
+
+            dashboard: {
+                title: "Centro de Mando APPE",
+                render: () => {
+                    const user = state.user || { name: "Estudiante", grade: "101" };
+                    const firstName = user.name ? user.name.split(' ').slice(-1).join(' ') : 'Estudiante';
+
+                    const MENU_ITEMS = [
+                        { id: 'menu_grados', label: 'GRADOS', icon: 'groups', color: '#067ff9', desc: 'Ver niveles' },
+                        { id: 'menu_asignaturas', label: 'ASIGNATURAS', icon: 'auto_stories', color: '#25f447', desc: 'Tus materias' },
+                        { id: 'menu_docentes', label: 'DOCENTES', icon: 'co_present', color: '#ff6b00', desc: 'Tus profesores' },
+                        { id: 'menu_horarios', label: 'HORARIOS', icon: 'calendar_month', color: '#eab308', desc: 'Tu agenda' },
+                        { id: 'menu_asistencia', label: 'ASISTENCIA', icon: 'verified', color: '#a855f7', desc: 'Tus registros' },
+                        { id: 'menu_premios', label: 'PREMIOS', icon: 'emoji_events', color: '#f43f5e', desc: 'Tus trofeos' },
+                        { id: 'menu_ai', label: 'ASISTENTE IA', icon: 'psychology', color: '#06cbf9', desc: 'Apoyo virtual' }
+                    ];
+
+                    const menuCards = MENU_ITEMS.map(item => `
+                        <div onclick="navigateTo('${item.id}')" class="group glass rounded-3xl p-5 border border-white/5 hover:bg-white/10 active:scale-95 transition-all cursor-pointer flex flex-col items-center text-center gap-3">
+                            <div class="size-14 rounded-2xl flex items-center justify-center mb-1 transition-transform group-hover:scale-110" style="background:${item.color}15;border:1px solid ${item.color}30;box-shadow:0 0 15px ${item.color}20;">
+                                <span class="material-symbols-outlined text-3xl" style="color:${item.color};">${item.icon}</span>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold tracking-widest text-white uppercase">${item.label}</h3>
+                                <p class="text-[9px] text-slate-500 font-medium uppercase mt-1 tracking-wider">${item.desc}</p>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    return `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24 hero-gradient">
+                        <header class="sticky top-0 z-20 bg-background-dark/90 backdrop-blur-md px-6 pt-12 pb-6 border-b border-white/5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="size-12 rounded-full border-2 border-primary p-0.5 overflow-hidden">
+                                        <img class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEannuJGdqy7XjYBYBvGHfm-gWPivn8mmeR_TEbiyiC90ux4aWDEsvk3lFtLITgOI-gKJ31TXbGWVg902_3VBG1VopYPiiKqh6nxW92MH808LSVYUC59sumlekJgTVzaRypfYKPrRnMw4rqGijEe5Sb5WQIk3BvtkIumrz7Qu1akdZkLdBtZmcYaX8cux7UsDIhNYr2GG75lQvcySi-7tjPD35sTf3BlLdj6hF5kjZ4_D54ergTc_qy3zNX31ay8E-GNeVn_OhQ6M">
+                                    </div>
+                                    <div>
+                                        <h1 class="text-[10px] uppercase tracking-[0.2em] text-primary font-bold">Soldado: ${firstName}</h1>
+                                        <p class="text-2xl font-heading tracking-wide">CENTRO DE MANDO</p>
+                                    </div>
+                                </div>
+                                <button onclick="navigateTo('welcome')" class="size-10 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10">
+                                    <span class="material-symbols-outlined text-slate-400 text-xl">logout</span>
+                                </button>
+                            </div>
+                        </header>
+
+                        <main class="flex-1 px-6 py-8">
+                            <div class="grid grid-cols-2 gap-4">
+                                ${menuCards}
+                            </div>
+                            
+                            <!-- Global Status Footer -->
+                            <div class="mt-8 glass rounded-3xl p-6 border-l-4 border-success">
+                                <div class="flex items-center gap-4">
+                                    <div class="size-12 rounded-2xl bg-success/10 flex items-center justify-center border border-success/20">
+                                        <span class="material-symbols-outlined text-success">local_police</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Estado de la Misión</p>
+                                        <p class="text-white font-medium">Sincronización Activa · Grado ${user.grade}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`;
+                }
+            },
+
+            menu_asignaturas: {
+                title: "Tus Asignaturas",
+                render: () => {
+                    const user = state.user || { name: "Estudiante", grade: "101" };
+                    const gradeNum = Number(user.grade);
+                    const gradeLabel = user.grade;
+
+                    const ALL_SUBJECTS = [
+                        { id: 'ciencias', name: 'Ciencias Económicas y Políticas', desc: 'Domina los flujos de poder y capital geopolítico.', icon: 'account_balance', hex: '#067ff9', progress: 45, condition: g => g >= 101 && g <= 116 },
+                        { id: 'catedra', name: 'Cátedra de la Paz', desc: 'Aprende a negociar la victoria y construir puentes.', icon: 'handshake', hex: '#25f447', progress: 20, condition: g => g >= 101 && g <= 112 },
+                        { id: 'etica', name: 'Ética y Valores', desc: 'Fortalece tus principios. La integridad es tu armadura.', icon: 'shield', hex: '#f97316', progress: 78, condition: g => g === 93 || g === 94 }
+                    ];
+
+                    const subjects = ALL_SUBJECTS.filter(s => s.condition(gradeNum));
+                    const subjectCards = subjects.map(s => `
+                        <div onclick="navigateToSubject('${s.id}')" class="relative group glass rounded-3xl p-6 border-l-4 hover:bg-white/5 transition-all cursor-pointer" style="border-left-color:${s.hex};">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="p-3 rounded-2xl material-symbols-outlined text-3xl" style="background:${s.hex}18;color:${s.hex};">${s.icon}</span>
+                                <span class="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" style="background:${s.hex}22;color:${s.hex};">Grado ${gradeLabel}</span>
+                            </div>
+                            <h3 class="text-xl font-heading tracking-wide mb-2">${s.name}</h3>
+                            <p class="text-slate-400 text-sm mb-6">${s.desc}</p>
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full transition-all" style="width:${s.progress}%;background:${s.hex};"></div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    return `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        ${renderScreenHeader("TUS MATERIAS", "Sincronización de Avance")}
+                        <main class="flex-1 px-6 py-4 space-y-6">
+                            ${subjects.length > 0 ? subjectCards : `<div class="glass rounded-3xl p-8 text-center text-slate-500">No hay materias para el grado ${gradeLabel}.</div>`}
+                        </main>
+                        ${renderBottomNav('subjects')}
+                    </div>`;
+                }
+            },
+            menu_grados: {
+                title: "Grados Institucionales",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24 hero-gradient">
+                        ${renderScreenHeader("GRADOS", "Niveles Académicos 2026")}
+                        <main class="flex-1 px-6 py-8">
+                            <div class="glass rounded-3xl p-8 text-center border-dashed border-2 border-white/10">
+                                <span class="material-symbols-outlined text-primary text-5xl mb-4 block">diversity_3</span>
+                                <p class="text-slate-400">Directorio de grados en desarrollo.</p>
+                                <button onclick="navigateTo('dashboard')" class="mt-6 text-primary font-bold uppercase tracking-widest text-xs">‹ Volver al Menú</button>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`
+            },
+            menu_docentes: {
+                title: "Cuerpo Docente",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        ${renderScreenHeader("DOCENTES", "Directorio Administrativo")}
+                        <main class="flex-1 px-6 py-8">
+                             <div class="glass rounded-3xl p-8 text-center">
+                                <span class="material-symbols-outlined text-vibrant-orange text-5xl mb-4 block">co_present</span>
+                                <p class="text-slate-400 text-sm">Próximamente: Consulta el perfil de tus profesores.</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`
+            },
+            menu_horarios: {
+                title: "Tu Horario",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24 hero-gradient">
+                        ${renderScreenHeader("HORARIOS", "Semanario Académico")}
+                        <main class="flex-1 px-6 py-8">
+                             <div class="glass rounded-3xl p-8 text-center">
+                                <span class="material-symbols-outlined text-yellow-500 text-5xl mb-4 block">calendar_month</span>
+                                <p class="text-slate-400">Próximamente: Tu horario personalizado por clase.</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`
+            },
+            menu_asistencia: {
+                title: "Reporte de Asistencia",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        ${renderScreenHeader("ASISTENCIA", "Tu Registro Diario")}
+                        <main class="flex-1 px-6 py-8">
+                             <div class="glass rounded-3xl p-8 text-center">
+                                <span class="material-symbols-outlined text-purple-500 text-5xl mb-4 block">verified</span>
+                                <p class="text-slate-400">Próximamente: Historial de puntualidad y novedades.</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`
+            },
+            menu_premios: {
+                title: "Tu Galería de Trofeos",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24 hero-gradient">
+                        ${renderScreenHeader("PREMIOS", "Logros Académicos")}
+                        <main class="flex-1 px-6 py-8">
+                             <div class="glass rounded-3xl p-8 text-center">
+                                <span class="material-symbols-outlined text-rose-500 text-5xl mb-4 block">emoji_events</span>
+                                <p class="text-slate-400">Próximamente: Desbloquea medallas por tu rendimiento.</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`
+            },
+            menu_ai: {
+                title: "Asistente IA",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        ${renderScreenHeader("ASISTENTE IA", "Inteligencia Académica")}
+                        <main class="flex-1 px-6 py-8">
+                             <div class="glass rounded-3xl p-8 text-center border-primary/30">
+                                <span class="material-symbols-outlined text-cyan-400 text-5xl mb-4 block">psychology</span>
+                                <p class="text-slate-400">APPE GPT v2.0 se está preparando para ayudarte.</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('dashboard')}
+                    </div>`
+            },
+            subjects: {
+                title: "Contenido de Materia",
+                render: () => {
+                    const subjectId = state.currentSubjectId || 'catedra';
+                    const cur = CURRICULUM_DB[subjectId];
+                    if (!cur) return `<div class="p-8 text-center text-slate-500">Materia no encontrada.</div>`;
+
+                    const weekCards = cur.weeks.map((w, i) => `
+                        <div class="glass rounded-3xl overflow-hidden border border-white/5 transition-all">
+                            <!-- Week header -->
+                            <button onclick="toggleWeek('week-${subjectId}-${i}')" class="w-full p-5 flex items-center gap-4 text-left">
+                                <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 font-black text-xs" style="background:${cur.color}22;color:${cur.color};border:1px solid ${cur.color}44;">${i + 1}</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest mb-0.5" style="color:${cur.color}99;">Semanas ${w.range} · ${w.dates}</p>
+                                    <p class="text-white text-sm font-bold leading-snug line-clamp-2">${w.objetivo.substring(0, 80)}${w.objetivo.length > 80 ? '…' : ''}</p>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-500 flex-shrink-0" id="chevron-week-${subjectId}-${i}">expand_more</span>
+                            </button>
+                            <!-- Week body (collapsible) -->
+                            <div id="week-${subjectId}-${i}" class="hidden border-t border-white/5">
+                                <!-- Objetivo completo -->
+                                <div class="px-5 pt-4 pb-3">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest mb-2" style="color:${cur.color};">🎯 Objetivo</p>
+                                    <p class="text-slate-300 text-sm leading-relaxed">${w.objetivo}</p>
+                                </div>
+                                <!-- Temas -->
+                                <div class="px-5 pb-3">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400">📚 Temas — toca uno para leer</p>
+                                    <div class="space-y-2">
+                                        ${w.temas.map((t, ti) => `
+                                        <div>
+                                            <button onclick="toggleTema('tema-${subjectId}-${i}-${ti}')" class="w-full flex items-center justify-between text-left px-3 py-2 rounded-2xl transition-all" style="background:${cur.color}12;color:${cur.color};border:1px solid ${cur.color}30;">
+                                                <span class="text-[12px] font-semibold">${t.nombre}</span>
+                                                <span class="material-symbols-outlined text-base flex-shrink-0 ml-2" id="ic-tema-${subjectId}-${i}-${ti}">add_circle</span>
+                                            </button>
+                                            <div id="tema-${subjectId}-${i}-${ti}" class="hidden mt-2 px-4 py-3 rounded-2xl text-slate-300 text-sm leading-relaxed" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);">${t.texto}</div>
+                                        </div>`).join('')}
+                                    </div>
+                                </div>
+                                <!-- Desempeños -->
+                                <div class="px-5 pb-3">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400">📊 Desempeños</p>
+                                    <div class="space-y-2">
+                                        <div class="p-3 rounded-xl" style="background:rgba(37,244,71,0.06);border-left:3px solid #25f447;"><span class="text-[10px] text-success font-bold uppercase">Superior · </span><span class="text-slate-300 text-xs">${w.desempenos.superior}</span></div>
+                                        <div class="p-3 rounded-xl" style="background:rgba(6,127,249,0.06);border-left:3px solid #067ff9;"><span class="text-[10px] text-primary font-bold uppercase">Alto · </span><span class="text-slate-300 text-xs">${w.desempenos.alto}</span></div>
+                                        <div class="p-3 rounded-xl" style="background:rgba(234,179,8,0.06);border-left:3px solid #eab308;"><span class="text-[10px] font-bold uppercase" style="color:#eab308;">Básico · </span><span class="text-slate-300 text-xs">${w.desempenos.basico}</span></div>
+                                        <div class="p-3 rounded-xl" style="background:rgba(249,115,22,0.06);border-left:3px solid #f97316;"><span class="text-[10px] text-vibrant-orange font-bold uppercase">Bajo · </span><span class="text-slate-300 text-xs">${w.desempenos.bajo}</span></div>
+                                    </div>
+                                </div>
+                                <!-- Actividades + Evaluación -->
+                                <div class="px-5 pb-5 grid grid-cols-2 gap-3">
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400">⚡ Actividades</p>
+                                        <ul class="space-y-1">${w.actividades.map(a => `<li class="text-xs text-slate-400 flex items-start gap-1.5"><span style="color:${cur.color};">›</span>${a}</li>`).join('')}</ul>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400">✅ Evaluación</p>
+                                        <ul class="space-y-1">${w.evaluacion.map(e => `<li class="text-xs text-slate-400 flex items-start gap-1.5"><span style="color:${cur.color};">›</span>${e}</li>`).join('')}</ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    return `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        <!-- Header -->
+                        <header class="relative px-6 pt-12 pb-5" style="background:linear-gradient(180deg,rgba(6,13,24,1) 0%,rgba(6,13,24,0.6) 100%)">
+                            <div class="flex items-center justify-between mb-5">
+                                <button onclick="navigateTo('dashboard')" class="w-10 h-10 flex items-center justify-center rounded-2xl" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+                                    <span class="material-symbols-outlined text-white">arrow_back_ios_new</span>
+                                </button>
+                                <div class="flex items-center gap-2 px-4 py-1.5 rounded-full" style="background:${cur.color}15;border:1px solid ${cur.color}30;">
+                                    <span class="material-symbols-outlined text-base" style="color:${cur.color};">${cur.icon}</span>
+                                    <span class="text-[11px] font-bold uppercase tracking-widest" style="color:${cur.color};">Grados ${cur.grades}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:${cur.color}18;border:1px solid ${cur.color}33;box-shadow:0 0 20px ${cur.color}20;">
+                                    <span class="material-symbols-outlined text-3xl" style="color:${cur.color};">${cur.icon}</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="font-heading text-2xl tracking-wider text-white leading-tight">${cur.shortName}</h1>
+                                    <p class="text-slate-400 text-xs mt-1">${cur.totalUnits} unidades · ${cur.totalWeeks} semanas</p>
+                                    
+                                    ${subjectId === 'catedra' ? `
+                                    <button onclick="window.open('mapa-interactivo.html', '_blank')" class="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-2xl bg-success/10 border border-success/30 text-success hover:bg-success/20 transition-all active:scale-95 group">
+                                        <span class="material-symbols-outlined text-lg group-hover:rotate-12 transition-transform">map</span>
+                                        <span class="text-[10px] font-black uppercase tracking-[0.15em]">Ver Mapa Interactivo</span>
+                                    </button>
+                                    ` : ''}
+
+                                    <!-- Progress bar -->
+                                    <div class="mt-5 w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div class="h-full rounded-full" style="width:20%;background:${cur.color};box-shadow:0 0 8px ${cur.color}66;"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-500 mt-1">Progreso del año</p>
+                                </div>
+                            </div>
+                        </header>
+
+                        <!-- Weekly content accordion -->
+                        <main class="flex-1 px-4 pb-4 space-y-3">
+                            ${weekCards}
+                        </main>
+                        ${renderBottomNav('subjects')}
+                    </div>`;
+                }
+            },
+            teacher_schedule: {
+                title: "Horario Docente",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        <header class="p-6 pb-2 pt-12 flex flex-col gap-1 relative overflow-hidden">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h1 class="font-heading text-4xl tracking-wider text-white">HORARIO SEMANAL</h1>
+                                    <p class="text-primary text-xs font-bold tracking-widest uppercase">Docente 2026 · Alex Guerrero</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-2">
+                                    <div class="flex items-center gap-2 bg-success/10 border border-success/30 px-3 py-1 rounded-full">
+                                        <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+                                        <span class="text-success text-[10px] font-bold uppercase tracking-tighter">En clases</span>
+                                    </div>
+                                    <button onclick="navigateTo('welcome')" class="text-slate-400"><span class="material-symbols-outlined">logout</span></button>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="flex gap-3 px-6 py-4 overflow-x-auto no-scrollbar">
+                            <div class="flex h-10 shrink-0 items-center gap-2 rounded-xl bg-vibrant-orange/10 border border-vibrant-orange/20 px-4">
+                                <span class="material-symbols-outlined text-vibrant-orange text-lg">book</span>
+                                <p class="text-vibrant-orange text-xs font-bold">25 Clases</p>
+                            </div>
+                            <div class="flex h-10 shrink-0 items-center gap-2 rounded-xl bg-primary/10 border border-primary/20 px-4">
+                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
+                                <p class="text-primary text-xs font-bold">18h Semanales</p>
+                            </div>
+                        </div>
+                        <div class="px-6 mb-6">
+                            <div class="flex bg-white/5 rounded-2xl p-1 border border-white/5">
+                                ${['L', 'M', 'X', 'J', 'V'].map(d => `<button class="flex-1 py-3 rounded-xl ${d === 'X' ? 'bg-primary text-white' : 'text-slate-500'} font-bold text-xs">${d}</button>`).join('')}
+                            </div>
+                        </div>
+                        <main class="flex-1 px-6 space-y-4">
+                            <div onclick="navigateTo('teacher_attendance')" class="glass p-5 rounded-3xl border-l-4 border-l-success relative cursor-pointer hover:bg-white/5 transition-all">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-[10px] text-success font-bold tracking-widest uppercase">9:45 - 10:40 · GRADO 11-1</span>
+                                    <span class="material-symbols-outlined text-primary text-xl">qr_code_2</span>
+                                </div>
+                                <h3 class="text-white text-lg font-bold">Ética y Valores</h3>
+                                <p class="text-slate-500 text-xs mt-1">Aula 202 · Haga clic para iniciar asistencia</p>
+                            </div>
+                            <div class="glass p-5 rounded-3xl border-l-4 border-l-primary opacity-60">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-[10px] text-primary font-bold tracking-widest uppercase">10:40 - 11:35 · GRADO 11-2</span>
+                                </div>
+                                <h3 class="text-white text-lg font-bold">Ciencias Económicas</h3>
+                                <p class="text-slate-500 text-xs mt-1">Aula 204</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('teacher_schedule')}
+                    </div>
+                `
+            },
+            teacher_roster: {
+                title: "Grupos y Alumnos",
+                render: () => {
+                    const grades = [...new Set(STUDENTS_DB.map(s => s.grade))].sort((a, b) => Number(a) - Number(b));
+                    return `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-32">
+                        <header class="pt-12 px-6 pb-4 border-b border-white/5">
+                            <div class="flex justify-between items-center mb-4">
+                                <button onclick="navigateTo('teacher_schedule')" class="material-symbols-outlined text-white">arrow_back_ios_new</button>
+                                <h1 class="font-heading text-4xl tracking-widest text-white">ALUMNOS</h1>
+                                <span class="material-symbols-outlined text-primary">groups</span>
+                            </div>
+                            <div class="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+                                ${grades.map(g => `
+                                    <button id="grade-btn-${g}" onclick="selectGrade('${g}')" class="flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all bg-white/5 text-slate-400 border border-white/10">
+                                        Grado ${g}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </header>
+                        <div class="px-6 pt-4 mb-2">
+                            <div class="relative">
+                                <input id="roster-search" oninput="filterRoster(this.value)" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-slate-600 outline-none focus:border-primary transition-all" placeholder="Buscar por nombre o código...">
+                                <span class="material-symbols-outlined absolute left-4 top-4 text-slate-500 pointer-events-none">search</span>
+                            </div>
+                        </div>
+                        <main class="flex-1 px-6 py-2" id="roster-list">
+                            <div class="flex items-center justify-center h-40 text-slate-600">
+                                <p class="text-sm">Selecciona un grado arriba</p>
+                            </div>
+                        </main>
+                        ${renderBottomNav('teacher_roster')}
+                    </div>`;
+                }
+            },
+            teacher_attendance: {
+                title: "Control de Asistencia",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-24">
+                        <header class="pt-12 px-6 pb-4 border-b border-white/5">
+                            <div class="flex justify-between items-center mb-4">
+                                <button onclick="navigateTo('teacher_schedule')" class="material-symbols-outlined text-white">arrow_back_ios_new</button>
+                                <h1 class="font-heading text-4xl tracking-widest text-white">ASISTENCIA QR</h1>
+                                <div class="size-10 rounded-full border border-primary/30 p-1">
+                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeZbUS1mifINDHt4sdjCwxeMIcoKHBAI2QWPYSAopcdA6k3YHx3afDNEzzf6_LQzwATCbvnWwKTBaRhfy0wQCmHUQptk9eHBptz9l_v55Ygt736nVbsSWwo1uPFWIoclanmynXW3T58cCnyK-nVaEZH4MzQJj-7BGBmj51H_9CwVBHNvpXDARIOhJvCRXMtgtyGSaTtvSyhem3k3epp-w0QyII2TQPczUVneGpdh-5TCaFwOqr03_VwvSm1GAQvIevYnDwkb1MFEs" class="w-full h-full rounded-full">
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-[10px] text-center font-bold tracking-[0.2em] uppercase">Miercoles 19 Feb · 11-1 · Ética</p>
+                        </header>
+                        <main class="flex-1 px-6 py-10 flex flex-col items-center">
+                            <div class="relative p-6 bg-white rounded-3xl shadow-[0_0_50px_rgba(6,127,249,0.3)] border-4 border-primary">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHKMdsjMi6BAVgGtASNiJSZCFEcMRD_tPsX5KH_wfr7sCfx0mmv0n_0sCom1VN2mo0kh9HcvTNvZmijBwqP_KbglPqOLH1BxZ1VbKy1DXqM7G4NIG-fCeVCU6SiHZGlOT7R-eokAMKOQ7CrR0dY1inxv73dOyuG5qcP7flR0PmBk40TVDQqBdA35b981Gm5DCyw0S1WaVM8AphABT62rUgjkQcl823VSIHVb4w0zqvPsixjaxHx7TvgzYCpZ_N_10V5ZX-xr3sP2I" class="size-56">
+                            </div>
+                            <div class="mt-10 flex items-center gap-6">
+                                <div class="text-center">
+                                    <p class="text-success text-2xl font-bold">29</p>
+                                    <p class="text-slate-500 text-[10px] font-bold uppercase">Presentes</p>
+                                </div>
+                                <div class="w-[1px] h-10 bg-white/10"></div>
+                                <div class="text-center">
+                                    <p class="text-slate-300 text-2xl font-bold">08</p>
+                                    <p class="text-slate-500 text-[10px] font-bold uppercase">Faltan</p>
+                                </div>
+                            </div>
+                            <button class="w-full h-16 bg-primary text-background-dark font-bold rounded-full mt-12 flex items-center justify-center gap-3">
+                                <span class="material-symbols-outlined">refresh</span>
+                                <span>Reiniciar Código</span>
+                            </button>
+                        </main>
+                        ${renderBottomNav('teacher_attendance')}
+                    </div>
+                `
+            },
+            profile: {
+                title: "Tu Perfil de Usuario",
+                render: () => {
+                    const user = state.user || { name: "Estudiante", grade: "101", code: "N/A" };
+                    return `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-32 hero-gradient">
+                        <header class="pt-16 px-6 pb-6 text-center">
+                            <div class="relative inline-block">
+                                <div class="size-32 rounded-full border-4 border-primary p-1 mx-auto overflow-hidden">
+                                    <img class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEannuJGdqy7XjYBYBvGHfm-gWPivn8mmeR_TEbiyiC90ux4aWDEsvk3lFtLITgOI-gKJ31TXbGWVg902_3VBG1VopYPiiKqh6nxW92MH808LSVYUC59sumlekJgTVzaRypfYKPrRnMw4rqGijEe5Sb5WQIk3BvtkIumrz7Qu1akdZkLdBtZmcYaX8cux7UsDIhNYr2GG75lQvcySi-7tjPD35sTf3BlLdj6hF5kjZ4_D54ergTc_qy3zNX31ay8E-GNeVn_OhQ6M">
+                                </div>
+                                <div class="absolute bottom-1 right-1 size-10 bg-success rounded-full flex items-center justify-center border-4 border-background-dark text-background-dark">
+                                    <span class="material-symbols-outlined text-xl font-bold">edit</span>
+                                </div>
+                            </div>
+                            <h1 class="font-heading text-3xl tracking-wider text-white mt-6 uppercase">${user.name}</h1>
+                            <p class="text-primary font-bold tracking-widest text-xs uppercase">Estudiante · Grado ${user.grade}</p>
+                        </header>
+                        <main class="flex-1 px-6 space-y-4">
+                            <div class="glass rounded-3xl p-6 border border-white/5 space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="size-12 rounded-2xl bg-white/5 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-primary">account_circle</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Institución</p>
+                                            <p class="text-white font-medium">COLEGIO LICEO DE LA AMISTAD</p>
+                                        </div>
+                                    </div>
+                                    <span class="material-symbols-outlined text-slate-600">chevron_right</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="size-12 rounded-2xl bg-white/5 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-success">verified_user</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Código</p>
+                                            <p class="text-white font-mono">${user.code}</p>
+                                        </div>
+                                    </div>
+                                    <span class="material-symbols-outlined text-slate-600">chevron_right</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="size-12 rounded-2xl bg-white/5 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-vibrant-orange">settings</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Configuración</p>
+                                            <p class="text-white font-medium">Preferencias del Sistema</p>
+                                        </div>
+                                    </div>
+                                    <span class="material-symbols-outlined text-slate-600">chevron_right</span>
+                                </div>
+                            </div>
+                            <button onclick="localStorage.clear(); location.reload();" class="w-full py-5 rounded-full bg-white/5 border border-white/10 text-red-500 font-bold text-sm tracking-widest uppercase hover:bg-red-500/10 transition-colors">
+                                Cerrar Sesión
+                            </button>
+                        </main>
+                        ${renderBottomNav('profile')}
+                    </div>
+                `
+                }
+            },
+            progress: {
+                title: "Tu Progreso Académico",
+                render: () => `
+                    <div class="flex flex-col min-h-screen bg-background-dark pb-32">
+                        <header class="pt-16 px-6 pb-6">
+                            <h1 class="font-heading text-5xl tracking-wide text-white uppercase">Tu Progreso</h1>
+                            <p class="text-slate-400 text-sm">Análisis de rendimiento en tiempo real</p>
+                        </header>
+                        <main class="flex-1 px-6 space-y-6">
+                            <div class="glass rounded-3xl p-6 border-l-4 border-primary">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h3 class="font-bold text-white text-xl">Promedio General</h3>
+                                    <span class="text-3xl font-heading text-primary">8.5</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                                            <span class="text-slate-400">Ciencias Económicas</span>
+                                            <span class="text-primary">45%</span>
+                                        </div>
+                                        <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                            <div class="h-full bg-primary" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                                            <span class="text-slate-400">Ética y Valores</span>
+                                            <span class="text-vibrant-orange">78%</span>
+                                        </div>
+                                        <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                            <div class="h-full bg-vibrant-orange" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                                            <span class="text-slate-400">Cátedra de Paz</span>
+                                            <span class="text-success">20%</span>
+                                        </div>
+                                        <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                            <div class="h-full bg-success" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="glass rounded-2xl p-6 flex flex-col items-center gap-3">
+                                    <span class="material-symbols-outlined text-success text-4xl">emoji_events</span>
+                                    <p class="text-white font-bold">12 Logros</p>
+                                    <p class="text-[10px] text-slate-500 uppercase font-bold">Desbloqueados</p>
+                                </div>
+                                <div class="glass rounded-2xl p-6 flex flex-col items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary text-4xl">timeline</span>
+                                    <p class="text-white font-bold">+15%</p>
+                                    <p class="text-[10px] text-slate-500 uppercase font-bold">Esta semana</p>
+                                </div>
+                            </div>
+                        </main>
+                        ${renderBottomNav('progress')}
+                    </div>
+                `
+            }
+
+        };
+
+        // --- Roster helpers ---
+        let _rosterGrade = null;
+
+        function selectGrade(grade) {
+            _rosterGrade = grade;
+            // Update button styles
+            document.querySelectorAll('[id^="grade-btn-"]').forEach(btn => {
+                const isActive = btn.id === `grade-btn-${grade}`;
+                btn.className = `flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${isActive ? 'bg-primary text-white' : 'bg-white/5 text-slate-400 border border-white/10'}`;
+            });
+            // Reset search and re-render list
+            const searchEl = document.getElementById('roster-search');
+            if (searchEl) searchEl.value = '';
+            filterRoster('');
+        }
+        window.selectGrade = selectGrade;
+
+        function filterRoster(query) {
+            const grade = _rosterGrade;
+            if (!grade) return;
+            const q = query.trim().toLowerCase();
+            const students = STUDENTS_DB.filter(s => {
+                if (s.grade !== grade) return false;
+                if (!q) return true;
+                return s.name.toLowerCase().includes(q) || s.code.includes(q);
+            });
+            const list = document.getElementById('roster-list');
+            if (!list) return;
+            if (students.length === 0) {
+                list.innerHTML = `<div class="text-center py-10 text-slate-500">
+                    <span class="material-symbols-outlined text-4xl">manage_search</span>
+                    <p class="mt-2 text-sm">Sin resultados para "${query}"</p>
+                </div>`;
+                return;
+            }
+            list.innerHTML = `
+                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-4">${students.length} estudiantes · Grado ${grade}</p>
+                <div class="space-y-2">
+                    ${students.map((s, i) => `
+                        <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="size-8 bg-primary rounded-full flex items-center justify-center text-xs font-bold text-background-dark flex-shrink-0">${(i + 1).toString().padStart(2, '0')}</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-white text-sm font-medium truncate">${s.name}</p>
+                                <p class="text-[9px] text-slate-500 font-mono">${s.code}</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-600 text-lg">person</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        window.filterRoster = filterRoster;
+
+        // Auto-select first grade after roster renders
+        const _origNavigateTo = navigateTo;
+        function navigateTo(screenId) {
+            _origNavigateTo(screenId);
+            if (screenId === 'teacher_roster') {
+                // Wait for DOM update then auto-select first grade
+                setTimeout(() => {
+                    const grades = [...new Set(STUDENTS_DB.map(s => s.grade))].sort((a, b) => Number(a) - Number(b));
+                    if (grades.length > 0) selectGrade(grades[0]);
+                }, 350);
+            }
+        }
+        window.navigateTo = navigateTo;
+
+
+        // --- Activation helpers (custom dropdown) ---
+        function toggleNameDropdown() {
+            const list = document.getElementById('name-dropdown-list');
+            if (list) list.classList.toggle('hidden');
+        }
+        window.toggleNameDropdown = toggleNameDropdown;
+
+        function selectGradeForActivation(grade) {
+            // Highlight active grade button
+            document.querySelectorAll('[id^="act-grade-"]').forEach(btn => {
+                const isActive = btn.id === `act-grade-${grade}`;
+                btn.className = `px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all active:scale-95 ${isActive ? '' : ''}`;
+                if (isActive) {
+                    btn.style.cssText = 'background:linear-gradient(135deg,#25f447,#06cbf9);color:#060d18;border:none;box-shadow:0 0 15px rgba(37,244,71,0.3);';
+                } else {
+                    btn.style.cssText = 'background:rgba(255,255,255,0.05);color:#94a3b8;border:1px solid rgba(255,255,255,0.08);';
+                }
+            });
+            const nameSection = document.getElementById('activation-name-section');
+            const list = document.getElementById('name-dropdown-list');
+            const label = document.getElementById('name-dropdown-label');
+            const codeSection = document.getElementById('activation-code-section');
+            const codeDisplay = document.getElementById('activation-code-display');
+            const btn = document.getElementById('activation-btn');
+            if (!nameSection || !list) return;
+            // Reset downstream
+            list.innerHTML = '';
+            if (label) { label.textContent = '-- Elige tu nombre --'; label.classList.remove('text-white'); label.classList.add('text-slate-500'); }
+            if (codeSection) codeSection.classList.add('hidden');
+            if (codeDisplay) codeDisplay.textContent = '—';
+            if (btn) { btn.disabled = true; btn.className = 'w-full h-16 bg-success/30 text-white/50 font-bold text-lg rounded-full flex items-center justify-center gap-3 transition-all cursor-not-allowed'; }
+            // Populate custom list items
+            const students = STUDENTS_DB.filter(s => s.grade === grade);
+            students.forEach(s => {
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'w-full text-left px-5 py-3 text-sm text-slate-200 hover:bg-success/10 hover:text-success transition-colors border-b border-white/5 last:border-0';
+                item.textContent = s.name;
+                item.onclick = () => selectStudentByName(s.name);
+                list.appendChild(item);
+            });
+            nameSection.classList.remove('hidden');
+            // Close dropdown list (it starts closed)
+            list.classList.add('hidden');
+        }
+        window.selectGradeForActivation = selectGradeForActivation;
+
+        function selectStudentByName(name) {
+            if (!name) return;
+            const student = STUDENTS_DB.find(s => s.name === name);
+            if (!student) return;
+            // Update trigger label
+            const label = document.getElementById('name-dropdown-label');
+            if (label) { label.textContent = student.name; label.classList.add('text-white'); label.classList.remove('text-slate-500'); }
+            // Close the list
+            const list = document.getElementById('name-dropdown-list');
+            if (list) list.classList.add('hidden');
+            // Show code
+            const codeSection = document.getElementById('activation-code-section');
+            const codeDisplay = document.getElementById('activation-code-display');
+            const btn = document.getElementById('activation-btn');
+            if (codeSection) codeSection.classList.remove('hidden');
+            if (codeDisplay) codeDisplay.textContent = student.code;
+            // Save to state
+            state.user = { name: student.name, code: student.code, grade: student.grade, institution: "COLEGIO LICEO DE LA AMISTAD" };
+            // Enable sync button
+            if (btn) { btn.disabled = false; btn.className = 'w-full h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-3 transition-all active:scale-95 cursor-pointer'; btn.style.cssText = 'background:linear-gradient(135deg,#25f447,#1adbf0);color:#060d18;border:none;box-shadow:0 0 25px rgba(37,244,71,0.35);'; }
+        }
+        window.selectStudentByName = selectStudentByName;
+
+        function doActivation() {
+            if (!state.user) return;
+            switchRole('student');
+            navigateTo('dashboard');
+        }
+        window.doActivation = doActivation;
+
+        // Navigate to subjects passing the subject ID
+        function navigateToSubject(subjectId) {
+            state.currentSubjectId = subjectId;
+            navigateTo('subjects');
+        }
+        window.navigateToSubject = navigateToSubject;
+
+        // Toggle week accordion in subjects screen
+        function toggleWeek(weekId) {
+            const body = document.getElementById(weekId);
+            if (!body) return;
+            // Extract chevron id from weekId
+            const chevron = document.getElementById('chevron-' + weekId);
+            const isOpen = !body.classList.contains('hidden');
+            if (isOpen) {
+                body.classList.add('hidden');
+                if (chevron) chevron.textContent = 'expand_more';
+            } else {
+                body.classList.remove('hidden');
+                if (chevron) chevron.textContent = 'expand_less';
+            }
+        }
+        window.toggleWeek = toggleWeek;
+
+        // Toggle topic text panel in subjects screen
+        function toggleTema(temaId) {
+            const panel = document.getElementById(temaId);
+            if (!panel) return;
+            const icon = document.getElementById('ic-' + temaId);
+            const isOpen = !panel.classList.contains('hidden');
+            if (isOpen) {
+                panel.classList.add('hidden');
+                if (icon) icon.textContent = 'add_circle';
+            } else {
+                panel.classList.remove('hidden');
+                if (icon) icon.textContent = 'remove_circle';
+            }
+        }
+        window.toggleTema = toggleTema;
+
+        // Close custom dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const wrapper = document.getElementById('custom-dropdown-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                const list = document.getElementById('name-dropdown-list');
+                if (list) list.classList.add('hidden');
+            }
+        });
+
+
+        function renderScreenHeader(title, subtitle) {
+            return `
+                <header class="relative px-6 pt-12 pb-6 border-b border-white/5">
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="navigateTo('dashboard')" class="size-10 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10">
+                            <span class="material-symbols-outlined text-white text-xl">arrow_back_ios_new</span>
+                        </button>
+                        <div class="text-right">
+                            <h1 class="font-heading text-3xl tracking-widest text-white uppercase">${title}</h1>
+                            <p class="text-[9px] text-primary font-bold uppercase tracking-[0.2em] mt-0.5">${subtitle}</p>
+                        </div>
+                    </div>
+                </header>
+            `;
+        }
+
+        function renderBottomNav(active) {
+            const isTeacher = state.role === 'teacher';
+            const navItems = isTeacher ? [
+                { id: 'teacher_schedule', icon: 'calendar_today', label: 'Horario' },
+                { id: 'teacher_attendance', icon: 'qr_code_scanner', label: 'Asistencia' },
+                { id: 'teacher_roster', icon: 'groups', label: 'Alumnos' },
+                { id: 'profile', icon: 'person', label: 'Perfil' }
+            ] : [
+                { id: 'dashboard', icon: 'grid_view', label: 'Inicio' },
+                { id: 'menu_asignaturas', icon: 'rocket_launch', label: 'Misiones' },
+                { id: 'progress', icon: 'monitoring', label: 'Progreso' },
+                { id: 'profile', icon: 'person', label: 'Perfil' }
+            ];
+
+            const isActive = (itemId) => {
+                if (active === itemId) return true;
+                if (active === 'subjects' && itemId === 'menu_asignaturas') return true;
+                return false;
+            };
+
+            return `
+                <nav class="fixed bottom-0 left-0 right-0 z-50 glass border-t border-white/10 px-6 pb-10 pt-4">
+                    <div class="flex justify-between items-center max-w-lg mx-auto">
+                        ${navItems.map(item => `
+                            <button onclick="navigateTo('${item.id}')" class="flex flex-col items-center gap-1.5 ${isActive(item.id) ? 'text-primary' : 'text-slate-500'}">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-xl ${isActive(item.id) ? 'bg-primary/10' : ''} transition-all">
+                                    <span class="material-symbols-outlined ${isActive(item.id) ? 'fill-[1]' : ''} text-2xl">${item.icon}</span>
+                                </div>
+                                <span class="text-[10px] font-bold uppercase tracking-widest">${item.label}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                </nav>
+            `;
+        }
+
+        function switchRole(role) {
+            state.role = role;
+            localStorage.setItem('appe_role', role);
+            console.log("Role switched to:", role);
+        }
+
+        function navigateTo(screenId) {
+            console.log("Navigating to:", screenId);
+            if (!screens[screenId]) {
+                console.error("Screen not found:", screenId);
+                return;
+            }
+
+            // Save to persistence
+            localStorage.setItem('appe_current_screen', screenId);
+
+            const overlay = document.getElementById('loading-overlay');
+            const container = document.getElementById('screen-container');
+
+            if (overlay) overlay.classList.remove('opacity-0', 'pointer-events-none');
+
+            setTimeout(() => {
+                state.currentScreen = screenId;
+                if (container) {
+                    document.title = `APPE 2026 - ${screens[screenId].title}`;
+                    container.innerHTML = screens[screenId].render();
+                }
+                if (overlay) overlay.classList.add('opacity-0', 'pointer-events-none');
+                window.scrollTo(0, 0);
+            }, 300);
+        }
+
+        window.navigateTo = navigateTo;
+        window.switchRole = switchRole;
+
+        function togglePilotMode() {
+            state.pilotMode = !state.pilotMode;
+            localStorage.setItem('appe_pilot_mode', state.pilotMode);
+
+            if (state.pilotMode) {
+                document.documentElement.classList.add('pilot-mode');
+            } else {
+                document.documentElement.classList.remove('pilot-mode');
+            }
+
+            // Re-render current screen to handle layout changes if needed
+            navigateTo(state.currentScreen);
+        }
+        window.togglePilotMode = togglePilotMode;
+
+        // Auto-init with persistence
+        function initApp() {
+            console.log("Initializing APPE...");
+
+            // Load persisted state
+            const savedRole = localStorage.getItem('appe_role');
+            if (savedRole) state.role = savedRole;
+
+            const savedPilot = localStorage.getItem('appe_pilot_mode');
+            if (savedPilot === 'true') {
+                state.pilotMode = true;
+                document.documentElement.classList.add('pilot-mode');
+            }
+
+            const savedScreen = localStorage.getItem('appe_current_screen');
+            if (savedScreen && screens[savedScreen]) {
+                navigateTo(savedScreen);
+            } else {
+                navigateTo('welcome');
+            }
+        }
+
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+    </script>
+</body>
+
+</html>
