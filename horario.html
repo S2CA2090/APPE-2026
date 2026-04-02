@@ -204,35 +204,34 @@
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-sm text-white/80">school</span>
 <p class="text-xs font-medium text-white/90">Prof. Martínez</p>
-</div>
-</div>
-</div>
-<!-- Block 3: Vacía -->
-<div class="flex gap-4">
-<div class="w-16 flex flex-col items-end pt-4">
-<span class="text-sm font-bold text-on-surface">8:30</span>
-<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
-</div>
-<button class="flex-1 border-2 border-dashed border-outline-variant/30 bg-surface-container-low/30 rounded-3xl py-6 flex flex-col items-center justify-center gap-2 text-on-surface-variant hover:bg-surface-container-high/40 transition-colors">
-<span class="material-symbols-outlined text-2xl">add_circle</span>
-<span class="text-sm font-bold uppercase tracking-wider">Agregar clase</span>
-</button>
-</div>
-<!-- Block 4: Inglés -->
-<div class="flex gap-4">
-<div class="w-16 flex flex-col items-end pt-4">
-<span class="text-sm font-bold text-on-surface">9:30</span>
-<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
-</div>
-<div class="flex-1 bg-[#1D9E75] p-5 rounded-3xl shadow-lg relative overflow-hidden active:scale-95 transition-transform">
-<div class="absolute top-0 right-0 p-3 opacity-20">
-<span class="material-symbols-outlined text-4xl">language</span>
-</div>
-<h3 class="font-headline font-extrabold text-lg text-white mb-1">Inglés</h3>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-sm text-white/80">school</span>
-<p class="text-xs font-medium text-white/90">Prof. Smith</p>
-</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-4 right-4 rounded-full overflow-hidden bg-[#020d27]/80 backdrop-blur-xl flex justify-around items-center h-20 w-auto z-50 shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+  <!-- Inicio (Active) -->
+  <a href="dashboard.html" class="flex flex-col items-center justify-center text-[#aaa4ff] after:content-[''] after:w-1 after:bg-[#aaa4ff] after:rounded-full after:mt-1 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Inicio</span>
+  </a>
+  <!-- Menú -->
+  <a href="menu_pae.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">grid_view</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Menú</span>
+  </a>
+  <!-- Horario -->
+  <a href="horario.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">calendar_today</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Horario</span>
+  </a>
+  <!-- Plataformas -->
+  <a href="plataformas.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">layers</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Plataformas</span>
+  </a>
+  <!-- Nutrición -->
+  <a href="menu_pae.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">restaurant</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Nutrición</span>
+  </a>
+</nav></div>
 </div>
 </div>
 <!-- Block 5: Hora Libre -->
