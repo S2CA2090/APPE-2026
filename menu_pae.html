@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>APPE - Menú Escolar V2.0</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Nunito:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#9b94ff",
+                        "surface-dim": "#000000",
+                        "secondary": "#86f8c9",
+                        "on-tertiary-fixed": "#001931",
+                        "on-primary-fixed": "#000000",
+                        "secondary-container": "#006c4e",
+                        "primary-fixed-dim": "#8d85f6",
+                        "on-secondary-container": "#e0ffee",
+                        "on-secondary": "#005e43",
+                        "secondary-dim": "#77e9bb",
+                        "on-tertiary-container": "#002648",
+                        "on-tertiary": "#00325b",
+                        "on-surface": "#dde5ff",
+                        "inverse-on-surface": "#495572",
+                        "secondary-fixed": "#86f8c9",
+                        "surface-container-low": "#111111",
+                        "tertiary-dim": "#54a1f6",
+                        "primary": "#aaa4ff",
+                        "surface-container-highest": "#222222",
+                        "error-dim": "#d73357",
+                        "background": "#000000",
+                        "primary-dim": "#9891ff",
+                        "surface-tint": "#aaa4ff",
+                        "on-background": "#dde5ff",
+                        "tertiary": "#75b4ff",
+                        "secondary-fixed-dim": "#77e9bb",
+                        "on-error-container": "#ffb2b9",
+                        "error": "#ff6e84",
+                        "on-primary-container": "#19007b",
+                        "on-error": "#490013",
+                        "tertiary-fixed": "#75b4ff",
+                        "on-primary-fixed-variant": "#231088",
+                        "surface-variant": "#1a1a1a",
+                        "surface": "#000000",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-fixed-dim": "#5aa7fc",
+                        "on-tertiary-fixed-variant": "#003b6a",
+                        "tertiary-container": "#5aa7fc",
+                        "inverse-surface": "#faf8ff",
+                        "surface-bright": "#1a1a1a",
+                        "on-secondary-fixed": "#004933",
+                        "on-surface-variant": "#9fabcc",
+                        "outline": "#6a7594",
+                        "surface-container": "#0f0f0f",
+                        "error-container": "#a70138",
+                        "on-secondary-fixed-variant": "#00694b",
+                        "primary-fixed": "#9b94ff",
+                        "surface-container-high": "#121212",
+                        "outline-variant": "#3c4764",
+                        "on-primary": "#26158a",
+                        "inverse-primary": "#5850bd"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"],
+                        "nunito": ["Nunito"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #000000;
+        }
+        .header-curve {
+            border-bottom-left-radius: 3rem;
+            border-bottom-right-radius: 3rem;
+        }
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.8);
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-black text-on-surface antialiased min-h-screen pb-32">
+<!-- Top Navigation Shell -->
+<header class="bg-[#FF6B35] header-curve pt-6 pb-12 px-6 sticky top-0 z-40 shadow-xl">
+<div class="flex justify-between items-center w-full mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white">restaurant</span>
+</div>
+<h1 class="text-white font-headline font-black text-2xl tracking-tighter">APPE</h1>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white/30 overflow-hidden">
+<img alt="Sofia Assistant" data-alt="Avatar of a friendly young student assistant with glasses and a purple sweater on a clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHasZC9GY3iLHkKACWLYy93u371nHqiHA-SnIABx-LO_775foHfPvb5MemsFweluCPMQV9cd6DWJjWmdU_cjwa9BGseuaFxp5E_Mg-Nbr3jjSh7-1Pe9rJFnUtqRgJ4-umzFwWBLfUBj9FCun3224Cp4-hyp9QWYRxCWAlxmWfi2MnYroXJVsV1hBxGbsHyCVf9udBqiFJscGPeg9iJa-epU-J30fwx5ckAXb5qmbERM0SPKGVxZi20d58pln7o9JlDEKJEBPB9gAc"/>
+</div>
+</div>
+<!-- Week Selector Tabs -->
+<div class="flex justify-between items-center bg-black/10 rounded-full p-1 mb-6">
+<button class="flex-1 py-2 text-sm font-bold text-white/60 hover:text-white transition-all">Sem 1</button>
+<button class="flex-1 py-2 text-sm font-bold bg-white text-[#FF6B35] rounded-full shadow-lg">Sem 2</button>
+<button class="flex-1 py-2 text-sm font-bold text-white/60 hover:text-white transition-all">Sem 3</button>
+<button class="flex-1 py-2 text-sm font-bold text-white/60 hover:text-white transition-all">Sem 4</button>
+</div>
+<!-- Day Selector -->
+<div class="flex justify-around gap-2">
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-white/80 font-bold uppercase mb-1">Lun</span>
+<div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-bold">11</div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-white font-black uppercase mb-1">Mar</span>
+<div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-[#FF6B35] font-black shadow-lg scale-110">12</div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-white/80 font-bold uppercase mb-1">Mié</span>
+<div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-bold">13</div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-white/80 font-bold uppercase mb-1">Jue</span>
+<div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-bold">14</div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-white/80 font-bold uppercase mb-1">Vie</span>
+<div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white font-bold">15</div>
+</div>
+</div>
+</header>
+<main class="px-6 -mt-6">
+<!-- Hero Banner Card -->
+<div class="relative rounded-xl overflow-hidden shadow-2xl mb-8 bg-zinc-900">
+<div class="h-48 w-full bg-cover bg-center" data-alt="close-up of a gourmet beef stew with rich brown sauce, fresh herbs, and vibrant vegetables in a modern dark ceramic bowl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3IXJ2B7GFCJcpoaMkBZItuJRcJFbX0FbBzFcwqdivDGbEaLCrWu95vuwz8vmNEAbVr6gspkAiVCLEehZPVvzjv0BnA4pKdPVDe-WWHjUZ-JH3hD_u1LeOoqXE07NWkt4-UmNNtGhc59H9Zuy9pHKbt6oRxtzJE87NaPAhIFoiGRWVMmV1oxgsn8LD6PhLiE9a_mAu7sa8dsTGSfNCHJRu6zREHDvcyz5Lf0twAktHwj-syRvMCII87LvBjBYqPontE4dZHJOcMmdo')">
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<div class="absolute top-4 right-4">
+<span class="bg-secondary text-on-secondary font-bold text-xs px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                    Con fruta hoy ✓
+                </span>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-secondary text-xs font-bold uppercase tracking-wider mb-1">Menú 7 • Martes Semana 2</p>
+<h2 class="text-white text-2xl font-black font-headline">Carne de res con guiso</h2>
+</div>
+<div class="flex gap-1 text-yellow-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sofia's Insight Bubble -->
+<div class="flex gap-4 mb-8">
+<div class="flex-shrink-0 relative">
+<div class="w-14 h-14 rounded-full bg-primary-container p-0.5 shadow-lg">
+<img alt="Sofia" class="rounded-full bg-zinc-800" data-alt="Digital illustration of a friendly student assistant with a purple hoodie and helpful expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA0-1dGLu-gdy4f5D_pGB0trCHe1zh4KmiDS0LqB_z2DetLt4SS3pxAiyPIGIfDO0YQ0DTcNpDb1-C6ezFWeBbg2GKErrA7pRsmAHZ9I_xnSo1EdQFcuPojzlxNML3VGQOuGllVkv5InXVSlE3XmmLp9oWcQqyhAXdLj1l_snnkEBDaq1tOZH-baC_DTsiZn8D_uvcBCXr9v6ZM5G_1aKLh8nuJz8fteahHNPlWo1WIuMFCAFs5GcTgkKuGYHdhaDsm7vpHqvD9jYG"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary rounded-full border-2 border-black"></div>
+</div>
+<div class="glass-panel rounded-2xl p-4 text-on-surface text-sm border-l-4 border-primary">
+<p class="font-medium leading-relaxed">
+                    ¡Carne de res! Fuente de hierro hemo que oxigena tu cerebro para que rindas al máximo en clase hoy. 🧠✨
+                </p>
+</div>
+</div>
+<!-- Nutrition Quick Stats -->
+<div class="grid grid-cols-3 gap-3 mb-8">
+<div class="bg-zinc-900 rounded-2xl p-3 flex flex-col items-center text-center">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Calorías</span>
+<span class="text-lg font-black text-primary">645</span>
+<span class="text-[10px] text-primary/60 font-bold">Kcal</span>
+</div>
+<div class="bg-zinc-900 rounded-2xl p-3 flex flex-col items-center text-center">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Proteína</span>
+<span class="text-lg font-black text-secondary">32g</span>
+<span class="text-[10px] text-secondary/60 font-bold">Total</span>
+</div>
+<div class="bg-zinc-900 rounded-2xl p-3 flex flex-col items-center text-center">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Cobertura</span>
+<span class="text-lg font-black text-tertiary">98%</span>
+<span class="text-[10px] text-tertiary/60 font-bold">Recomendado</span>
+</div>
+</div>
+<!-- Expandable Menu Components -->
+<section class="space-y-4 mb-10">
+<h3 class="text-on-surface-variant text-xs font-black uppercase tracking-widest px-1">Componentes del Menú</h3>
+<!-- 1. Bebida -->
+<div class="bg-zinc-900 rounded-xl overflow-hidden transition-all duration-300">
+<div class="p-5 flex items-center justify-between border-l-4 border-secondary">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">local_drink</span>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-black uppercase">Bebida</p>
+<h4 class="text-white font-bold">Sorbete de guayaba</h4>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- 2. Proteico (Expanded State Representation) -->
+<div class="bg-zinc-900 rounded-xl overflow-hidden border-l-4 border-[#FF6B35]">
+<div class="p-5 flex items-center justify-between bg-zinc-800">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#FF6B35]/10 flex items-center justify-center text-[#FF6B35]">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<p class="text-[10px] text-[#FF6B35] font-black uppercase">Proteico</p>
+<h4 class="text-white font-bold">Carne de res en trozos con guiso</h4>
+</div>
+</div>
+<span class="material-symbols-outlined text-white">expand_less</span>
+</div>
+<div class="p-5 space-y-6 bg-zinc-900">
+<!-- Bloque A: Macros -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-black/40 rounded-xl p-3 border border-zinc-800">
+<p class="text-[10px] text-on-surface-variant font-bold mb-2">MACRONUTRIENTES</p>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs"><span class="text-on-surface/70">Proteína:</span><span class="font-bold text-secondary">24g</span></div>
+<div class="flex justify-between text-xs"><span class="text-on-surface/70">Grasas:</span><span class="font-bold text-error">12g</span></div>
+</div>
+</div>
+<div class="bg-black/40 rounded-xl p-3 text-center flex flex-col justify-center border border-zinc-800">
+<span class="text-2xl font-black text-white">210</span>
+<span class="text-[10px] text-on-surface-variant font-bold">KCAL</span>
+</div>
+</div>
+<!-- Bloque B: Micros -->
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold mb-3 uppercase tracking-tighter">Micronutrientes Destacados</p>
+<div class="flex gap-2">
+<span class="bg-tertiary-container/20 text-tertiary text-[10px] px-2 py-1 rounded-full border border-tertiary/30 font-bold">Hierro Hemo</span>
+<span class="bg-tertiary-container/20 text-tertiary text-[10px] px-2 py-1 rounded-full border border-tertiary/30 font-bold">Vitamina B12</span>
+<span class="bg-tertiary-container/20 text-tertiary text-[10px] px-2 py-1 rounded-full border border-tertiary/30 font-bold">Zinc</span>
+</div>
+</div>
+<!-- Bloque C: Consejo Sofia -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-3 flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">tips_and_updates</span>
+<p class="text-xs text-primary-fixed italic leading-snug">Sofía dice: Combina esta carne con el sorbete de guayaba; la Vitamina C ayuda a que tu cuerpo absorba mejor el hierro.</p>
+</div>
+</div>
+</div>
+<!-- 3. Cereal -->
+<div class="bg-zinc-900 rounded-xl overflow-hidden transition-all duration-300">
+<div class="p-5 flex items-center justify-between border-l-4 border-amber-400">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-amber-400/10 flex items-center justify-center text-amber-400">
+<span class="material-symbols-outlined">bakery_dining</span>
+</div>
+<div>
+<p class="text-[10px] text-amber-400 font-black uppercase">Cereal</p>
+<h4 class="text-white font-bold">Arroz blanco + Papa aborrajada</h4>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- 4. Fruta -->
+<div class="bg-zinc-900 rounded-xl overflow-hidden transition-all duration-300">
+<div class="p-5 flex items-center justify-between border-l-4 border-pink-400">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-pink-400/10 flex items-center justify-center text-pink-400">
+<span class="material-symbols-outlined">nutrition</span>
+</div>
+<div>
+<p class="text-[10px] text-pink-400 font-black uppercase">Fruta</p>
+<h4 class="text-white font-bold">Granadilla</h4>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Semáforo Nutricional -->
+<section class="bg-zinc-900 rounded-3xl p-6 mb-8">
+<h3 class="text-white font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                Semáforo Nutricional
+            </h3>
+<div class="space-y-5">
+<!-- Proteínas -->
+<div>
+<div class="flex justify-between text-[11px] font-bold uppercase mb-2">
+<span class="text-on-surface">Proteínas</span>
+<span class="text-secondary">Óptimo</span>
+</div>
+<div class="w-full h-2.5 bg-black rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Carbohidratos -->
+<div>
+<div class="flex justify-between text-[11px] font-bold uppercase mb-2">
+<span class="text-on-surface">Carbohidratos</span>
+<span class="text-amber-400">Moderado</span>
+</div>
+<div class="w-full h-2.5 bg-black rounded-full overflow-hidden">
+<div class="h-full bg-amber-400 w-[60%] rounded-full"></div>
+</div>
+</div>
+<!-- Grasas -->
+<div>
+<div class="flex justify-between text-[11px] font-bold uppercase mb-2">
+<span class="text-on-surface">Grasas</span>
+<span class="text-error">Controlar</span>
+</div>
+<div class="w-full h-2.5 bg-black rounded-full overflow-hidden">
+<div class="h-full bg-error w-[40%] rounded-full"></div>
+</div>
+</div>
+<!-- Vitaminas Grid -->
+<div class="grid grid-cols-3 gap-4 pt-2">
+<div class="space-y-2">
+<span class="text-[9px] font-black text-on-surface-variant uppercase">Calcio</span>
+<div class="h-1 bg-black rounded-full"><div class="h-full bg-tertiary w-[70%] rounded-full"></div></div>
+</div>
+<div class="space-y-2">
+<span class="text-[9px] font-black text-on-surface-variant uppercase">Hierro</span>
+<div class="h-1 bg-black rounded-full"><div class="h-full bg-primary w-[90%] rounded-full"></div></div>
+</div>
+<div class="space-y-2">
+<span class="text-[9px] font-black text-on-surface-variant uppercase">Vit C</span>
+<div class="h-1 bg-black rounded-full"><div class="h-full bg-secondary w-[55%] rounded-full"></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Saludable Recommendation -->
+<div class="bg-secondary/10 border border-secondary/20 rounded-2xl p-5 mb-8 flex items-center gap-4">
+<div class="bg-secondary rounded-2xl p-3 text-on-secondary">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<div>
+<h5 class="text-secondary font-black text-sm uppercase">TIP SALUDABLE DEL DÍA</h5>
+<p class="text-on-surface text-sm leading-tight">Come la granadilla al final; sus enzimas naturales ayudan a una digestión mucho más ligera.</p>
+</div>
+</div>
+<!-- Footer / Legal -->
+<footer class="pb-12 text-center">
+<p class="text-[10px] text-on-surface-variant leading-relaxed max-w-[280px] mx-auto">
+                Este menú ha sido diseñado y avalado por el equipo de nutricionistas escolares de la institución bajo estándares de la resolución 2024.
+            </p>
+</footer>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-6 left-6 right-6 z-50 flex justify-around items-center h-20 px-4 bg-zinc-900 border border-zinc-800 rounded-full shadow-2xl">
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-[#aaa4ff] transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary text-white rounded-full px-4 py-2 scale-110 shadow-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Académico</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-[#aaa4ff] transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Comedor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-[#aaa4ff] transition-colors" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Calendario</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-[#aaa4ff] transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Perfil</span>
+</a>
+</nav>
+<!-- Floating Action Button -->
+<div class="fixed bottom-28 right-6 z-50">
+<button class="bg-primary text-white px-6 py-4 rounded-full flex items-center gap-3 shadow-xl scale-100 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-bold text-sm">Preguntar a Sofía</span>
+</button>
+</div>
+</body></html>
