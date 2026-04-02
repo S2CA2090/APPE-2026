@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>APPE - Plataformas y Redes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#5aa7fc",
+              "on-primary-container": "#19007b",
+              "on-tertiary-fixed": "#001931",
+              "outline-variant": "#3c4764",
+              "on-tertiary": "#00325b",
+              "on-tertiary-fixed-variant": "#003b6a",
+              "on-secondary-container": "#e0ffee",
+              "secondary-fixed": "#86f8c9",
+              "on-error": "#490013",
+              "error-dim": "#d73357",
+              "on-background": "#dde5ff",
+              "on-primary-fixed": "#000000",
+              "secondary-fixed-dim": "#77e9bb",
+              "primary-dim": "#9891ff",
+              "inverse-on-surface": "#495572",
+              "surface-container-low": "#04122f",
+              "on-primary": "#26158a",
+              "surface-container-high": "#0d1e41",
+              "secondary-dim": "#77e9bb",
+              "on-error-container": "#ffb2b9",
+              "primary": "#aaa4ff",
+              "tertiary-fixed-dim": "#5aa7fc",
+              "on-primary-fixed-variant": "#231088",
+              "surface-dim": "#020d27",
+              "tertiary-fixed": "#75b4ff",
+              "background": "#020d27",
+              "inverse-primary": "#5850bd",
+              "on-secondary-fixed-variant": "#00694b",
+              "tertiary-dim": "#54a1f6",
+              "tertiary": "#75b4ff",
+              "primary-container": "#9b94ff",
+              "surface-container-highest": "#12244a",
+              "surface": "#020d27",
+              "secondary-container": "#006c4e",
+              "surface-variant": "#12244a",
+              "secondary": "#86f8c9",
+              "surface-container": "#081838",
+              "outline": "#6a7594",
+              "on-tertiary-container": "#002648",
+              "error-container": "#a70138",
+              "on-secondary": "#005e43",
+              "on-surface-variant": "#9fabcc",
+              "primary-fixed": "#9b94ff",
+              "on-secondary-fixed": "#004933",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#dde5ff",
+              "surface-tint": "#aaa4ff",
+              "surface-bright": "#172b53",
+              "primary-fixed-dim": "#8d85f6",
+              "inverse-surface": "#faf8ff",
+              "error": "#ff6e84"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Be Vietnam Pro"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sofia-pulse::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+            background: #aaa4ff;
+            opacity: 0.2;
+            z-index: -1;
+            transform: scale(1.2);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .glass-bubble {
+            background: rgba(23, 43, 83, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32 overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#020d27] flex items-center justify-between px-6 h-16 shadow-none">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#aaa4ff] active:scale-95 duration-200 cursor-pointer">arrow_back</span>
+<span class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-xl font-extrabold text-[#aaa4ff]">APPE</span>
+</div>
+<span class="material-symbols-outlined text-[#aaa4ff] active:scale-95 duration-200 cursor-pointer">menu</span>
+</nav>
+<!-- Header Section -->
+<header class="pt-24 pb-12 px-6 bg-gradient-to-br from-[#1A1040] to-[#4C1D95] rounded-b-xl relative overflow-hidden">
+<div class="relative z-10">
+<h1 class="font-headline text-3xl font-extrabold text-white tracking-tight mb-4">Plataformas y Redes</h1>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-secondary text-xs font-semibold border border-secondary/20">4 pagos</span>
+<span class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-primary text-xs font-semibold border border-primary/20">5 redes</span>
+<span class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-tertiary text-xs font-semibold border border-tertiary/20">2 IAs</span>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+</header>
+<main class="px-6 -mt-6 relative z-20 space-y-8">
+<!-- Sofia Interaction -->
+<div class="flex items-start gap-4">
+<div class="relative flex-shrink-0">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary/30 flex items-center justify-center sofia-pulse">
+<img class="w-full h-full object-cover" data-alt="Stylized female student avatar with a friendly expression, soft purple lighting, digital assistant aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJF_7lckP3j_jhH42iXGshXcneVROyFL_YiUBMDhXXLMBthVBWK_yrTVMH_kVabjolKYehd4QbO90Eko1sLMofVa80z5J0DUcr5ZVqzkjOEYGRu3t3e0in5yDCP8pkHdGSo7FMcu-VDdhH3kbauryo8Z2PhgabtnH26j7vyBZ2TD7x_Dbmz0B1d_LCvR8DsbGuVdw7tA78j1AX34JEYkGHhquA_gPX0bElsv--QgDrrnP7b65-Al_LghIuII2AKc5LAI46aIBWCnkK"/>
+</div>
+</div>
+<div class="glass-bubble p-4 rounded-2xl rounded-tl-none border border-white/5 shadow-xl">
+<p class="text-sm leading-relaxed text-on-surface">
+                    Accede a tus redes, paga con tu plataforma favorita o consulta con IA. Todo desde aquí.
+                </p>
+</div>
+</div>
+<!-- Section 1: Redes Sociales -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline text-lg font-bold text-primary">Redes Sociales</h2>
+<span class="text-xs text-on-surface-variant font-medium">Ver todas</span>
+</div>
+<div class="bento-grid">
+<!-- WhatsApp -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-high rounded-xl aspect-square active:scale-95 transition-transform border-b-2 border-[#25D366]/50">
+<img class="w-8 h-8 mb-2" data-alt="WhatsApp social media logo icon with its signature green and white color scheme" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNqInHR6Ig_-V3DFYC2tJYIBcqEPfiFAjHAbhn5aaZ2AsT5yXrfJ7K_0Y1sNx4k__uCXjw-WDt0J26fQdzEIAr6JHe1uUCLiFUzlngr-G-ewmvm_TclljHGYAbolpyyWLO2Q1Jdy12Zh4R-qOn4HEjgLoqfeHyH9U--wNxb7oPROZWZaPxWNyTntvLNWXQiHncyAgCm0VNh18KmMdq2hDL7l30efKIPyTXp_CztX199cBVeYst9rgoFDKBpxNuj2EYxhXil9gZh2pg"/>
+<span class="text-[10px] font-bold tracking-wide">WhatsApp</span>
+</button>
+<!-- X (Twitter) -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-high rounded-xl aspect-square active:scale-95 transition-transform border-b-2 border-white/20">
+<img class="w-8 h-8 mb-2" data-alt="The modern X logo formerly Twitter, minimalist black and white icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr9s9yMB9Kj2n3einoRX1hajCVB6YmKG6-bUKEkJHQsa95W8vceuB-vXb3vGMAMu9HP31pexYiywhy7JF4RQOajj3VzXjG8I-CFdbLtCIy1w38NpAfauUWpseU4JxpXN6F839xWWafFPt8BFUBxx6mKB1V5W9s2GqlR3aewjrLBZPq78ZxHwekMo35Jf8NHD6PqMyfQCKKyaSPueFPA8UDQGnbWU14l6IlHmUE6wHDOuhX6W6FDwBNQwXVy4rkBzuDPhzWiAyx4uSk"/>
+<span class="text-[10px] font-bold tracking-wide">X (Twitter)</span>
+</button>
+<!-- TikTok -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-high rounded-xl aspect-square active:scale-95 transition-transform border-b-2 border-[#00f2ea]/50">
+<img class="w-8 h-8 mb-2" data-alt="TikTok logo with cyan and magenta chromatic aberration effect on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBloQDCkaI1cHnqFFCMxu9ksjjRfWA-BlPP5YGjbFRBC0X7DtpS89QX9PZGdujHUPwowZ2YTvuAs2CIxgLRZmRMwl6lOJjmvqT8k4F3leaWIkO9BFydh1F3SkTSflz2t4Zp5uUs_wFR0Pm7hea5gDyUqQ5RecabcSxYYpgNMveFbloK0PSKSstfUTYYx6fPut0LIEtUBxvOokZGOnwStbGM16x3HKH08_KzGuUJXf60E2PYVpjU5I3TF44DihK_9I_SYSC7KF2WNmtf"/>
+<span class="text-[10px] font-bold tracking-wide">TikTok</span>
+</button>
+<!-- Instagram -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-high rounded-xl aspect-square active:scale-95 transition-transform border-b-2 border-[#E1306C]/50">
+<img class="w-8 h-8 mb-2" data-alt="Instagram camera logo with vibrant gradient of purple, pink and orange" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbiwZiq-_vOzOdbJUFis2LKsoF29CUad5FnkXSZZTDBLPfgUaIIc5HQJri1mlFFiigsj6CnyemvoadhKNebDv43I05CVXmBwbJoVtV5qTkEOu7u7PrFW2SGIWYjz1uXQrPOe4ObPaOKWJDr6PRzxKBBGnqRaWL5ffbgDaDpjLdkoiajJfriwVBu3yP-kfAmskYC5E69E-Gp7YZvnwHh6d-k4Te-0aoZmpDxQ2cspO5PYrw4nlczBlxZGaR6T1EAMYeGmDLZ1k1bm8M"/>
+<span class="text-[10px] font-bold tracking-wide">Instagram</span>
+</button>
+<!-- Facebook -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-high rounded-xl aspect-square active:scale-95 transition-transform border-b-2 border-[#1877F2]/50">
+<img class="w-8 h-8 mb-2" data-alt="Facebook 'f' logo icon in classic blue and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_inKkN3UKs7-Sbs5WvClQ5k3pcPQPt5F_3p0V1CN_MMcYDxH9xilD4doFwvzELxP2cV7suSkYZoGRk5gPZDyh69N7oLRwYN7YxmE2R5e83i4UXPO3mdjrcbE6eiGOr-721LWOgiREjHWtYJpqKy6tYP6B0BpooFYnIlR86Bvw3KSAoiFuu9hTASPJT_ym3RrgveRTbbE0a6aQDMeoerFzOpf8o1b1G-y3exeSvRwsK5yQ121FjG9HHHY4mdg3Rr_rj8CNI3K3UwAt"/>
+<span class="text-[10px] font-bold tracking-wide">Facebook</span>
+</button>
+<!-- Threads (Filler) -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-high rounded-xl aspect-square active:scale-95 transition-transform border-b-2 border-white/10 opacity-50">
+<span class="material-symbols-outlined text-2xl mb-2">add</span>
+<span class="text-[10px] font-bold tracking-wide">Más</span>
+</button>
+</div>
+</section>
+<!-- Section 2: Inteligencia Artificial -->
+<section>
+<h2 class="font-headline text-lg font-bold text-tertiary mb-4">Inteligencia Artificial</h2>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<!-- Claude -->
+<div class="bg-surface-container-high p-4 rounded-xl border-l-4 border-tertiary flex items-center gap-3 active:scale-95 transition-transform cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-tertiary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">psychology</span>
+</div>
+<div>
+<p class="font-bold text-sm">Claude IA</p>
+<p class="text-[10px] text-on-surface-variant">Análisis Avanzado</p>
+</div>
+</div>
+<!-- ChatGPT -->
+<div class="bg-surface-container-high p-4 rounded-xl border-l-4 border-secondary flex items-center gap-3 active:scale-95 transition-transform cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">chat</span>
+</div>
+<div>
+<p class="font-bold text-sm">ChatGPT</p>
+<p class="text-[10px] text-on-surface-variant">Asistente General</p>
+</div>
+</div>
+</div>
+<!-- Warning Banner IA -->
+<div class="bg-tertiary/10 border border-tertiary/20 rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary text-lg">verified_user</span>
+<p class="text-[10px] text-tertiary leading-tight">
+                    Recuerda verificar las respuestas de la IA con fuentes oficiales. APPE no garantiza la precisión total de los modelos externos.
+                </p>
+</div>
+</section>
+<!-- Section 3: Pagos Colombia -->
+<section class="space-y-4">
+<h2 class="font-headline text-lg font-bold text-secondary">Pagos Colombia</h2>
+<div class="bento-grid">
+<!-- Nequi -->
+<button class="group relative bg-surface-container-high p-4 rounded-xl flex flex-col items-center justify-center aspect-square active:scale-95 transition-all overflow-hidden">
+<img class="w-10 h-10 mb-2" data-alt="Nequi app logo with its characteristic purple and pink brand colors for financial transactions" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-ltTYCl2JzSPDsBEUtM5ycu-ZLbFz_43MAMTk_Dd01zNu2Hormh1q_BGQd-5xCe-Dd01hPChpn6M28PvS81wg7DlrlnetppiiHzjMqmuEFA9gUaBN9-o-lndVRldUJSy_15EnnIGUjCjPrAMqD8NVFfnAna0PnVYxihvigrDIBEutuRS2ZiIx3VBUmgZPwDs3Ce_u-Y7Zs-z9UkHOUJ0DWtqYydlIbsB0rOtSpvENfqmF5VO6921BbtviZdCI-YT3tR5muVxr7S8T"/>
+<span class="text-[10px] font-bold">Nequi</span>
+</button>
+<!-- Daviplata -->
+<button class="bg-surface-container-high p-4 rounded-xl flex flex-col items-center justify-center aspect-square active:scale-95 transition-all">
+<img class="w-10 h-10 mb-2" data-alt="Daviplata logo with its distinctive red house icon representing the Colombian digital wallet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIS-Wp4nkuLK3-R9K7Jy2Fv8Tq84Tuac8zITGc54vmXyaV67qirstFT3EJ3efkiibE6BqQb9MdOYdGiX_tpah1FUk08DMRGjpvSur5zDeJ_xBQ7zcwLIIcYEp4IkGZ3TfyuPd5P7s4DP0cdBGoIlC3ye7Zo-43PiJyXdfxFaCII6BPIsiRnRHyYF3HbI1wPCaEzWZQd6r3ArXHmZAOUhouI6tWeFdqUT7l_Yqb0vivJctUm7ZQEXB3pOdS6LPwDRJecTixQbWT0pTV"/>
+<span class="text-[10px] font-bold">Daviplata</span>
+</button>
+<!-- Bancolombia -->
+<button class="bg-surface-container-high p-4 rounded-xl flex flex-col items-center justify-center aspect-square active:scale-95 transition-all">
+<img class="w-10 h-10 mb-2" data-alt="Bancolombia logo featuring yellow, blue and red strokes signifying the Colombian bank" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2heSArOGSi10ryp3JhNhw_b8WplTNczYplMkp_TcWK0dl0e153S7CJBCrJOvub4yIvmuZzLKcRcJ9K24S8IvKvBeZkXhBaPdbl6pX4thraaww2MeXL5CIaQjW9M-q4xKnU1pwqDOyMw_796eUDZ2b_MKjcz6kQZdfkMxXhrLMnbqfQHKMDD5LXgeTthRtzF0ak6MOQA4XRlK-pGdNVdqQE5GVll8kB9WSGenLrLFsT7F20z41gG4NuGKvVzLXFT4J0gEfTUE0v2LB"/>
+<span class="text-[10px] font-bold text-center leading-tight">Bancolombia</span>
+</button>
+<!-- PSE -->
+<button class="bg-surface-container-high p-4 rounded-xl flex flex-col items-center justify-center aspect-square active:scale-95 transition-all">
+<img class="w-10 h-10 mb-2" data-alt="PSE Secure Electronic Payments logo in blue and yellow colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUYzmM40cJ9K_6-Hw0vfKwVsHstwWH3G10rVNAGD2sVMwVY0cRlrwK2rwKWhhypMXjfhGc2Ivy7GpBZhUkf0giz_4Gz_pjBpWdAXFE3TxALNK-tq3XdG91Wf0tvEra82qD6SPi_G5_-k1W4hkvul59uEN3ELL_BihJcViDb_GeJXVf4diGIGVCMJRzr49hlhfJYmhGQDFHadRQ0YBJCVjz372XextgsELt0vQdJutEUHP3XWgVxzJv-iiQ2A0o836QPanfd94pourB"/>
+<span class="text-[10px] font-bold">PSE</span>
+</button>
+<!-- Efecty (Filler) -->
+<button class="bg-surface-container-high p-4 rounded-xl flex flex-col items-center justify-center aspect-square active:scale-95 transition-all opacity-50">
+<span class="material-symbols-outlined text-2xl mb-2">add_card</span>
+<span class="text-[10px] font-bold">Otros</span>
+</button>
+<!-- Placeholder -->
+<div class="border-2 border-dashed border-outline-variant/30 rounded-xl aspect-square flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant/50">lock</span>
+</div>
+</div>
+<!-- Security Warning Banner -->
+<div class="bg-error/10 border border-error/20 rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-error text-lg">security</span>
+<p class="text-[10px] text-error leading-tight font-medium">
+                    APPE NO almacena tus datos de pago ni contraseñas. Serás redirigido de forma segura al portal oficial de cada entidad.
+                </p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-4 right-4 rounded-full overflow-hidden bg-[#020d27]/80 backdrop-blur-xl flex justify-around items-center h-20 px-4 w-auto z-50 shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+<button class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Inicio</span>
+</button>
+<button class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Menú</span>
+</button>
+<button class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Horario</span>
+</button>
+<!-- Active Item: Plataformas -->
+<button class="flex flex-col items-center justify-center text-[#aaa4ff] after:content-[''] after:w-1 after:h-1 after:bg-[#aaa4ff] after:rounded-full after:mt-1 active:scale-90 duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Plataformas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Nutrición</span>
+</button>
+</nav>
+<!-- Modal (Conceptual for interaction) -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-6">
+<div class="bg-surface-container-high w-full max-w-sm rounded-3xl p-6 shadow-2xl border border-white/5">
+<div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-secondary text-3xl">open_in_new</span>
+</div>
+<h3 class="text-xl font-bold text-center mb-2">Redirección Segura</h3>
+<p class="text-on-surface-variant text-sm text-center mb-6">Vas a ser redirigido a la plataforma oficial. Recuerda no compartir tus claves con nadie.</p>
+<div class="flex gap-3">
+<button class="flex-1 py-3 rounded-full font-bold text-sm bg-surface-container-highest text-on-surface">Cancelar</button>
+<button class="flex-1 py-3 rounded-full font-bold text-sm bg-gradient-to-r from-primary to-primary-container text-on-primary">Continuar</button>
+</div>
+</div>
+</div>
+</body></html>
