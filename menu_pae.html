@@ -204,34 +204,34 @@
 </div>
 </div>
 <!-- Expandable Menu Components -->
-<section class="space-y-4 mb-10">
-<h3 class="text-on-surface-variant text-xs font-black uppercase tracking-widest px-1">Componentes del Menú</h3>
-<!-- 1. Bebida -->
-<div class="bg-zinc-900 rounded-xl overflow-hidden transition-all duration-300">
-<div class="p-5 flex items-center justify-between border-l-4 border-secondary">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined">local_drink</span>
-</div>
-<div>
-<p class="text-[10px] text-secondary font-black uppercase">Bebida</p>
-<h4 class="text-white font-bold">Sorbete de guayaba</h4>
-</div>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
-</div>
-</div>
-<!-- 2. Proteico (Expanded State Representation) -->
-<div class="bg-zinc-900 rounded-xl overflow-hidden border-l-4 border-[#FF6B35]">
-<div class="p-5 flex items-center justify-between bg-zinc-800">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-[#FF6B35]/10 flex items-center justify-center text-[#FF6B35]">
-<span class="material-symbols-outlined">restaurant</span>
-</div>
-<div>
-<p class="text-[10px] text-[#FF6B35] font-black uppercase">Proteico</p>
-<h4 class="text-white font-bold">Carne de res en trozos con guiso</h4>
-</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-4 right-4 rounded-full overflow-hidden bg-[#020d27]/80 backdrop-blur-xl flex justify-around items-center h-20 w-auto z-50 shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+  <!-- Inicio (Active) -->
+  <a href="dashboard.html" class="flex flex-col items-center justify-center text-[#aaa4ff] after:content-[''] after:w-1 after:bg-[#aaa4ff] after:rounded-full after:mt-1 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Inicio</span>
+  </a>
+  <!-- Menú -->
+  <a href="menu_pae.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">grid_view</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Menú</span>
+  </a>
+  <!-- Horario -->
+  <a href="horario.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">calendar_today</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Horario</span>
+  </a>
+  <!-- Plataformas -->
+  <a href="plataformas.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">layers</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Plataformas</span>
+  </a>
+  <!-- Nutrición -->
+  <a href="menu_pae.html" class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300">
+    <span class="material-symbols-outlined">restaurant</span>
+    <span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Nutrición</span>
+  </a>
+</nav>
 </div>
 <span class="material-symbols-outlined text-white">expand_less</span>
 </div>
