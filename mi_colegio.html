@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>APPE - Mi Colegio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#5aa7fc",
+              "on-primary-container": "#19007b",
+              "on-tertiary-fixed": "#001931",
+              "outline-variant": "#3c4764",
+              "on-tertiary": "#00325b",
+              "on-tertiary-fixed-variant": "#003b6a",
+              "on-secondary-container": "#e0ffee",
+              "secondary-fixed": "#86f8c9",
+              "on-error": "#490013",
+              "error-dim": "#d73357",
+              "on-background": "#dde5ff",
+              "on-primary-fixed": "#000000",
+              "secondary-fixed-dim": "#77e9bb",
+              "primary-dim": "#9891ff",
+              "inverse-on-surface": "#495572",
+              "surface-container-low": "#04122f",
+              "on-primary": "#26158a",
+              "surface-container-high": "#0d1e41",
+              "secondary-dim": "#77e9bb",
+              "on-error-container": "#ffb2b9",
+              "primary": "#aaa4ff",
+              "tertiary-fixed-dim": "#5aa7fc",
+              "on-primary-fixed-variant": "#231088",
+              "surface-dim": "#020d27",
+              "tertiary-fixed": "#75b4ff",
+              "background": "#020d27",
+              "inverse-primary": "#5850bd",
+              "on-secondary-fixed-variant": "#00694b",
+              "tertiary-dim": "#54a1f6",
+              "tertiary": "#75b4ff",
+              "primary-container": "#9b94ff",
+              "surface-container-highest": "#12244a",
+              "surface": "#020d27",
+              "secondary-container": "#006c4e",
+              "surface-variant": "#12244a",
+              "secondary": "#86f8c9",
+              "surface-container": "#081838",
+              "outline": "#6a7594",
+              "on-tertiary-container": "#002648",
+              "error-container": "#a70138",
+              "on-secondary": "#005e43",
+              "on-surface-variant": "#9fabcc",
+              "primary-fixed": "#9b94ff",
+              "on-secondary-fixed": "#004933",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#dde5ff",
+              "surface-tint": "#aaa4ff",
+              "surface-bright": "#172b53",
+              "primary-fixed-dim": "#8d85f6",
+              "inverse-surface": "#faf8ff",
+              "error": "#ff6e84"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Be Vietnam Pro"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sofia-pulse {
+            box-shadow: 0 0 0 0 rgba(170, 164, 255, 0.4);
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(170, 164, 255, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(170, 164, 255, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(170, 164, 255, 0); }
+        }
+        .glass-bubble {
+            background: rgba(23, 43, 83, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#020d27] flex items-center justify-between px-6 h-16 shadow-none">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#aaa4ff] hover:opacity-80 transition-opacity active:scale-95 duration-200 cursor-pointer">arrow_back</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-xl font-extrabold text-[#aaa4ff]">APPE</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/35 hover:opacity-80 transition-opacity active:scale-95 duration-200 cursor-pointer">menu</span>
+</div>
+</header>
+<main class="pt-16 pb-32 min-h-screen space-y-8">
+<!-- Hero School Header -->
+<section class="relative h-48 flex items-end px-6 pb-6 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-[#064E3B] to-[#059669] opacity-90"></div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay" data-alt="Modern academic building architecture with large windows and green spaces under a clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg1hKKMfgQPE001swi79xGwc5FN5pKnCTI2H8q3ZggbVIpEgkb1oBN9vSAKfL3Br4sdFuulOQgjM0G_96aZ3a4HADDvWzfO3mgXubmCtrWp6Z4fU4CIkfhiZeWPnOMog0AGdMFC5dQ1zo6GaZG7YSAmzo7Y0Y_kgqiHTnb9o_wkmEUCT4C9kMySSBEx8dYHLT-c1c3SVPSz48l2OBW21FnFvHeIY9IOXD-E4SCbW9BPjihnFQb_MSGvBd_ZZylpoX1mHTGus6dQN9P"/>
+<div class="relative z-10 flex items-center gap-4">
+<div class="w-16 h-16 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
+<img class="w-full h-full object-contain" data-alt="Minimalist school crest logo with a shield and book symbol in green and gold" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2uGn9MfKd30-qsLmEgu1D1V5ssbgmzQoSSH02MNnjtGuXFg_PEZPnHA8MDPGsgdD4kGOvOwjYV4F-sx-OyLzzE40GmgvAQMXAW4WdLEUdBzXkEbp0jiOljTnApyvKmMLqUtGni_gq2gXOSE1ZFgi6ksm_34qAq8VdCSkDfZtpC0MLGoSxw9YwDRiKi25iOlDJkikkXFpVTT2xu23_Fy3B5owvD5GP36Cda-qOS2HCvI-G0KwDARyvGeo2pHmmdiSm1Bwn4qf_SLwD"/>
+</div>
+<div>
+<h2 class="text-2xl font-headline font-extrabold text-white leading-tight">Mi colegio</h2>
+<p class="text-white/80 font-medium text-sm">Institución Educativa Central • Bogotá D.C.</p>
+</div>
+</div>
+</section>
+<!-- Sofia Contextual Assistant -->
+<section class="px-6">
+<div class="glass-bubble rounded-xl p-4 flex items-start gap-4 border border-outline-variant/15 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl text-primary">auto_awesome</span>
+</div>
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center sofia-pulse">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Friendly AI student assistant character avatar with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvv7-PJtlMG7N82QbzWg8lR3zf9Hh2--hSLg6WjA6Fm9oFw3CRLFj0vOIraGNCDetCC1_7NwP2mS7mIRI6jCTPOaTSlZYwnviGdutwcj_PKx4T1jJhp2h30JDgSjTF0m7pcrr8x6_7fkVXhqyXgwAfuxOVKwcuuISrCSyFR-TVPFtcbkk716_Li9LSB9-XrqgklCERtJdcA6yK6wqRnxGPSWhTOiIciVeDJM9fOLlBFWrJ9XaJZjPleLZfltKjrYxIid9fUBMXE1Vs"/>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<p class="text-xs font-bold text-primary uppercase tracking-wider">Sofía dice:</p>
+<p class="text-sm text-on-surface leading-relaxed">¿Buscas algo específico? Puedo ayudarte a encontrar el manual de convivencia o contactar a un docente de matemáticas.</p>
+</div>
+</div>
+</section>
+<!-- Horizontal Scroll Filters -->
+<nav class="flex gap-3 px-6 overflow-x-auto no-scrollbar py-2">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-bold text-sm whitespace-nowrap shadow-lg shadow-primary/20">Todo</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Manual</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Docentes</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Calendario</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Rutas</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Mapa</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-bright transition-colors">Contacto</button>
+</nav>
+<!-- Quick Access Bento Grid -->
+<section class="px-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square rounded-xl bg-secondary-container/30 border border-secondary/20 p-5 flex flex-col justify-between group active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-secondary text-3xl">book_2</span>
+<div>
+<h3 class="font-bold text-secondary">Manual</h3>
+<p class="text-[10px] text-secondary-fixed opacity-70">Normas y derechos</p>
+</div>
+</div>
+<div class="aspect-square rounded-xl bg-[#231088]/30 border border-primary/20 p-5 flex flex-col justify-between group active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">contact_page</span>
+<div>
+<h3 class="font-bold text-primary">Directorio</h3>
+<p class="text-[10px] text-primary-fixed opacity-70">Busca a tu profe</p>
+</div>
+</div>
+<div class="aspect-square rounded-xl bg-error-container/20 border border-error/20 p-5 flex flex-col justify-between group active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-error text-3xl">emergency_home</span>
+<div>
+<h3 class="font-bold text-error">Rutas</h3>
+<p class="text-[10px] text-error-dim opacity-70">Protocolos de atención</p>
+</div>
+</div>
+<div class="aspect-square rounded-xl bg-tertiary-container/20 border border-tertiary/20 p-5 flex flex-col justify-between group active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-tertiary text-3xl">map</span>
+<div>
+<h3 class="font-bold text-tertiary">Mapa</h3>
+<p class="text-[10px] text-tertiary-fixed opacity-70">Explora la sede</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Academic Calendar Section -->
+<section class="px-6 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-headline font-bold text-on-surface">Calendario Académico</h3>
+<span class="text-xs text-primary font-bold">Ver todo</span>
+</div>
+<div class="space-y-3">
+<!-- Period Card -->
+<div class="bg-surface-container-high rounded-xl p-4 flex gap-4 border-l-4 border-secondary shadow-sm">
+<div class="flex flex-col items-center justify-center bg-surface-container-highest px-3 py-2 rounded-lg min-w-[60px]">
+<span class="text-xs font-bold text-secondary-fixed">OCT</span>
+<span class="text-2xl font-bold text-white">12</span>
+</div>
+<div class="flex-1">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-tight">Periodo 4</p>
+<h4 class="font-bold text-on-surface">Cierre de Calificaciones</h4>
+<p class="text-xs text-on-surface-variant">Último plazo para entrega de actividades</p>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-xl p-4 flex gap-4 border-l-4 border-primary shadow-sm opacity-80">
+<div class="flex flex-col items-center justify-center bg-surface-container-highest px-3 py-2 rounded-lg min-w-[60px]">
+<span class="text-xs font-bold text-primary-fixed">NOV</span>
+<span class="text-2xl font-bold text-white">05</span>
+</div>
+<div class="flex-1">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-tight">Evento</p>
+<h4 class="font-bold text-on-surface">Feria de la Ciencia</h4>
+<p class="text-xs text-on-surface-variant">Presentación de proyectos finales</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Attendance Routes (Situation Cards) -->
+<section class="px-6 space-y-4">
+<h3 class="text-xl font-headline font-bold text-on-surface">Rutas de Atención</h3>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<!-- Emergency Red Card -->
+<div class="min-w-[280px] bg-error-container p-6 rounded-xl flex flex-col justify-between h-48 relative overflow-hidden">
+<span class="material-symbols-outlined absolute -right-4 -top-4 text-9xl text-white/10" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div class="relative z-10">
+<h4 class="text-white font-bold text-lg leading-tight">¿Situación de Emergencia?</h4>
+<p class="text-white/80 text-sm mt-2">Atención inmediata para casos críticos o riesgo físico.</p>
+</div>
+<button class="bg-white text-error font-extrabold py-3 rounded-full text-sm uppercase tracking-widest active:scale-95 transition-all">Llamar Ahora (123)</button>
+</div>
+<!-- Academic Route -->
+<div class="min-w-[280px] bg-surface-container-high p-6 rounded-xl flex flex-col justify-between h-48 border border-outline-variant/10">
+<div>
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-secondary">school</span>
+</div>
+<h4 class="text-on-surface font-bold text-lg leading-tight">Ruta Académica</h4>
+<p class="text-on-surface-variant text-sm mt-1">Dificultades en aprendizaje o reprobación.</p>
+</div>
+<div class="flex items-center gap-2 text-primary font-bold text-xs">
+                        Ver pasos <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Map Preview -->
+<section class="px-6 space-y-4">
+<h3 class="text-xl font-headline font-bold text-on-surface">Mapa del Colegio</h3>
+<div class="bg-surface-container-high rounded-xl overflow-hidden border border-outline-variant/15">
+<div class="aspect-video bg-surface-container-highest relative">
+<img class="w-full h-full object-cover opacity-40" data-alt="Digital architectural rendering of a school campus plan with labels for blocks A, B, and C" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbgdCVnWCoFqygdJpQ-lEXLR7i_brLQFuNKDmCNIP7rd4dBfCiQozaRDI2mOkI6TK2EjaIdFT3T8AC8xDYdqUbZ-hVAgH4Eb1_ut0ki3NvU_b4LDJ9_jAe-GFNSPwtpF4FR3WXnskbAxChS1U7bjbP-Blz2uFz_efdf4JyrwMXsp2YT0viajTuTL9ZKSBlvYTm1n4XQG7CHXNKuPogVUgusSihObtpXrn5iAq6DFQn7mOoLVTxbDtKLf0wcBPL2Vt3assEFeJy8DKK"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="bg-primary text-on-primary text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">ESTÁS AQUÍ</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-surface-bright/80 backdrop-blur-md p-3 rounded-full shadow-xl">
+<span class="material-symbols-outlined text-white">fullscreen</span>
+</button>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div>
+<p class="font-bold text-sm text-on-surface">Bloque C - Laboratorios</p>
+<p class="text-[10px] text-on-surface-variant">Siguiente clase: Química • 10:30 AM</p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-bold">Buscar Aula</button>
+</div>
+</div>
+</section>
+<!-- Contacts Footer -->
+<section class="px-6 space-y-4">
+<h3 class="text-xl font-headline font-bold text-on-surface">Directorio de Emergencia</h3>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">support_agent</span>
+</div>
+<div>
+<p class="font-bold text-sm">Línea 106</p>
+<p class="text-[10px] text-on-surface-variant">Apoyo emocional 24/7</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">call</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">child_care</span>
+</div>
+<div>
+<p class="font-bold text-sm">ICBF</p>
+<p class="text-[10px] text-on-surface-variant">Protección infantil</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">call</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-4 right-4 rounded-full overflow-hidden bg-[#020d27]/80 backdrop-blur-xl flex justify-around items-center h-20 px-4 w-full z-50 no-border shadow-2xl shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+<!-- Inicio (Active) -->
+<a class="flex flex-col items-center justify-center text-[#aaa4ff] after:content-[''] after:w-1 after:h-1 after:bg-[#aaa4ff] after:rounded-full after:mt-1 hover:text-white/60 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Inicio</span>
+</a>
+<!-- Menú -->
+<a class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Menú</span>
+</a>
+<!-- Horario -->
+<a class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Horario</span>
+</a>
+<!-- Plataformas -->
+<a class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Plataformas</span>
+</a>
+<!-- Nutrición -->
+<a class="flex flex-col items-center justify-center text-white/35 hover:text-white/60 transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium">Nutrición</span>
+</a>
+</nav>
+</body></html>
