@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mi Horario de Clases - APPE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#6a7594",
+                        "on-surface-variant": "#9fabcc",
+                        "inverse-on-surface": "#495572",
+                        "on-primary-fixed": "#000000",
+                        "surface-tint": "#aaa4ff",
+                        "error": "#ff6e84",
+                        "background": "#020d27",
+                        "primary-fixed-dim": "#8d85f6",
+                        "on-surface": "#dde5ff",
+                        "surface-variant": "#12244a",
+                        "on-error": "#490013",
+                        "on-tertiary-fixed": "#001931",
+                        "primary-container": "#9b94ff",
+                        "secondary": "#86f8c9",
+                        "inverse-primary": "#5850bd",
+                        "tertiary": "#75b4ff",
+                        "surface-container-highest": "#12244a",
+                        "on-tertiary-fixed-variant": "#003b6a",
+                        "secondary-fixed": "#86f8c9",
+                        "secondary-dim": "#77e9bb",
+                        "surface-container": "#081838",
+                        "on-tertiary": "#00325b",
+                        "tertiary-fixed": "#75b4ff",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-container": "#5aa7fc",
+                        "error-container": "#a70138",
+                        "on-secondary-container": "#e0ffee",
+                        "surface-container-high": "#0d1e41",
+                        "surface-container-low": "#04122f",
+                        "primary": "#aaa4ff",
+                        "surface-dim": "#020d27",
+                        "on-background": "#dde5ff",
+                        "tertiary-dim": "#54a1f6",
+                        "on-secondary": "#005e43",
+                        "on-tertiary-container": "#002648",
+                        "on-secondary-fixed": "#004933",
+                        "inverse-surface": "#faf8ff",
+                        "surface-bright": "#172b53",
+                        "surface": "#020d27",
+                        "on-primary-container": "#19007b",
+                        "secondary-container": "#006c4e",
+                        "on-primary-fixed-variant": "#231088",
+                        "primary-fixed": "#9b94ff",
+                        "tertiary-fixed-dim": "#5aa7fc",
+                        "primary-dim": "#9891ff",
+                        "error-dim": "#d73357",
+                        "on-secondary-fixed-variant": "#00694b",
+                        "secondary-fixed-dim": "#77e9bb",
+                        "on-error-container": "#ffb2b9",
+                        "on-primary": "#26158a",
+                        "outline-variant": "#3c4764"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .curved-header {
+            border-bottom-left-radius: 3rem;
+            border-bottom-right-radius: 3rem;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-[#0F1B35] font-body text-on-surface min-h-screen pb-32">
+<!-- Header Section -->
+<header class="bg-gradient-to-b from-[#185FA5] to-[#378ADD] curved-header pt-12 pb-10 px-6 shadow-lg">
+<div class="flex items-center justify-between mb-8">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+<span class="material-symbols-outlined text-white">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold text-xl text-white tracking-tight">Mi horario de clases</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+<span class="material-symbols-outlined text-white">add</span>
+</button>
+</div>
+<!-- Grade Selector -->
+<div class="flex gap-3 overflow-x-auto custom-scrollbar mb-4">
+<button class="px-5 py-2 rounded-full bg-white/10 text-white font-medium text-sm whitespace-nowrap">6°</button>
+<button class="px-5 py-2 rounded-full bg-white/10 text-white font-medium text-sm whitespace-nowrap">7°</button>
+<button class="px-5 py-2 rounded-full bg-white/10 text-white font-medium text-sm whitespace-nowrap">8°</button>
+<button class="px-5 py-2 rounded-full bg-white/10 text-white font-medium text-sm whitespace-nowrap">9°</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#185FA5] font-bold text-sm whitespace-nowrap shadow-md">10°</button>
+<button class="px-5 py-2 rounded-full bg-white/10 text-white font-medium text-sm whitespace-nowrap">11°</button>
+</div>
+<p class="text-center text-white/50 text-xs font-medium mb-6">Jornada 6:30 am – 12:30 pm</p>
+<!-- Stats Chips -->
+<div class="flex justify-center gap-2">
+<div class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-[#86f8c9]">menu_book</span>
+<span class="text-[11px] font-bold text-white">4 clases hoy</span>
+</div>
+<div class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-[#86f8c9]">person</span>
+<span class="text-[11px] font-bold text-white">3 docentes</span>
+</div>
+<div class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-[#86f8c9]">schedule</span>
+<span class="text-[11px] font-bold text-white">4 h asignadas</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-6 mt-8 space-y-8">
+<!-- View Toggle & Day Selector -->
+<div class="space-y-6">
+<div class="flex bg-surface-container-low p-1 rounded-full w-fit mx-auto">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-bold text-xs">Vista diaria</button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant font-medium text-xs">Vista semanal</button>
+</div>
+<div class="flex justify-between items-center bg-surface-container-high/50 p-4 rounded-3xl">
+<button class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Lun</span>
+</button>
+<button class="flex flex-col items-center gap-1 relative">
+<span class="text-[10px] text-primary font-bold uppercase tracking-widest">Mar</span>
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute -bottom-3"></span>
+</button>
+<button class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Mié</span>
+</button>
+<button class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Jue</span>
+</button>
+<button class="flex flex-col items-center gap-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Vie</span>
+</button>
+</div>
+</div>
+<!-- Sofia Bubble -->
+<div class="flex items-start gap-4 bg-surface-bright/60 backdrop-blur-xl p-5 rounded-xl border border-white/5">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary/30">
+<img class="w-full h-full object-cover" data-alt="Female student assistant avatar with friendly expression and glowing holographic accessories" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjlQZdeJiSA4AQKmfpqRezQJnbl6xZo9-jixB-nKShxvDkWnFdvbjdejo4T0XwsrSGiK3y5Sj_PZDADXeG2TM7pExLLmJJmp82WKHlqiD8NantJnWGEK86uU5SiNkqWCPcmSHO1_ZA3Q4FAXZdh6qjks5y3QtJMd-tzg7SgXIiy9G2ikUaxs9HexVmscqkv9mWpSl5bui97PRdgY7hspdQ9kv2KQzaBRz0W8pUWMrz6pXlzSE_dUp1XnmRWzLoGbyTiJpOfRh4-HG8"/>
+</div>
+<div class="absolute inset-0 rounded-full border border-primary/20 animate-ping"></div>
+</div>
+<p class="text-sm font-medium leading-relaxed">
+                ¡Vas bien! Tienes 4 clases hoy. <span class="text-primary">¿Falta alguna por agregar?</span>
+</p>
+</div>
+<!-- Schedule Timeline -->
+<div class="space-y-6">
+<!-- Block 1: Matemáticas -->
+<div class="flex gap-4">
+<div class="w-16 flex flex-col items-end pt-4">
+<span class="text-sm font-bold text-on-surface">6:30</span>
+<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
+</div>
+<div class="flex-1 bg-[#7F77DD] p-5 rounded-3xl shadow-lg relative overflow-hidden group active:scale-95 transition-transform">
+<div class="absolute top-0 right-0 p-3 opacity-20">
+<span class="material-symbols-outlined text-4xl">calculate</span>
+</div>
+<h3 class="font-headline font-extrabold text-lg text-white mb-1">Matemáticas</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-white/80">school</span>
+<p class="text-xs font-medium text-white/90">Prof. Rodríguez</p>
+</div>
+</div>
+</div>
+<!-- Block 2: Español -->
+<div class="flex gap-4">
+<div class="w-16 flex flex-col items-end pt-4">
+<span class="text-sm font-bold text-on-surface">7:30</span>
+<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
+</div>
+<div class="flex-1 bg-[#BA7517] p-5 rounded-3xl shadow-lg relative overflow-hidden active:scale-95 transition-transform">
+<div class="absolute top-0 right-0 p-3 opacity-20">
+<span class="material-symbols-outlined text-4xl">menu_book</span>
+</div>
+<h3 class="font-headline font-extrabold text-lg text-white mb-1">Español</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-white/80">school</span>
+<p class="text-xs font-medium text-white/90">Prof. Martínez</p>
+</div>
+</div>
+</div>
+<!-- Block 3: Vacía -->
+<div class="flex gap-4">
+<div class="w-16 flex flex-col items-end pt-4">
+<span class="text-sm font-bold text-on-surface">8:30</span>
+<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
+</div>
+<button class="flex-1 border-2 border-dashed border-outline-variant/30 bg-surface-container-low/30 rounded-3xl py-6 flex flex-col items-center justify-center gap-2 text-on-surface-variant hover:bg-surface-container-high/40 transition-colors">
+<span class="material-symbols-outlined text-2xl">add_circle</span>
+<span class="text-sm font-bold uppercase tracking-wider">Agregar clase</span>
+</button>
+</div>
+<!-- Block 4: Inglés -->
+<div class="flex gap-4">
+<div class="w-16 flex flex-col items-end pt-4">
+<span class="text-sm font-bold text-on-surface">9:30</span>
+<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
+</div>
+<div class="flex-1 bg-[#1D9E75] p-5 rounded-3xl shadow-lg relative overflow-hidden active:scale-95 transition-transform">
+<div class="absolute top-0 right-0 p-3 opacity-20">
+<span class="material-symbols-outlined text-4xl">language</span>
+</div>
+<h3 class="font-headline font-extrabold text-lg text-white mb-1">Inglés</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-white/80">school</span>
+<p class="text-xs font-medium text-white/90">Prof. Smith</p>
+</div>
+</div>
+</div>
+<!-- Block 5: Hora Libre -->
+<div class="flex gap-4">
+<div class="w-16 flex flex-col items-end pt-4">
+<span class="text-sm font-bold text-on-surface">10:30</span>
+<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
+</div>
+<div class="flex-1 border-2 border-dashed border-outline-variant/10 bg-surface-container-lowest/20 rounded-3xl py-6 flex flex-col items-center justify-center gap-1 text-on-surface-variant/40">
+<span class="text-xs font-bold uppercase tracking-tighter">Hora libre</span>
+</div>
+</div>
+<!-- Block 6: Ética y Valores -->
+<div class="flex gap-4">
+<div class="w-16 flex flex-col items-end pt-4">
+<span class="text-sm font-bold text-on-surface">11:30</span>
+<span class="text-[10px] text-on-surface-variant font-medium">AM</span>
+</div>
+<div class="flex-1 bg-[#D4537E] p-5 rounded-3xl shadow-lg relative overflow-hidden active:scale-95 transition-transform">
+<div class="absolute top-0 right-0 p-3 opacity-20">
+<span class="material-symbols-outlined text-4xl">volunteer_activism</span>
+</div>
+<h3 class="font-headline font-extrabold text-lg text-white mb-1">Ética y Valores</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-white/80">school</span>
+<p class="text-xs font-medium text-white/90">Prof. Correa</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Sheet Form (Visible partially for context) -->
+<div class="fixed inset-x-0 bottom-0 z-50 transform translate-y-16">
+<div class="bg-surface-container p-8 rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-white/5">
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full mx-auto mb-8"></div>
+<h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Agregar clase</h2>
+<form class="space-y-5">
+<div>
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant mb-3 ml-4">Asignatura</label>
+<div class="flex gap-2 items-center">
+<div class="flex-1 flex gap-2 overflow-x-auto custom-scrollbar pb-1">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-bold whitespace-nowrap shadow-lg shadow-primary/20" type="button">Matemáticas</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Español</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Inglés</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Ciencias</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Ética</button>
+</div>
+<button class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-surface-container-high border border-white/5 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-sm">search</span>
+</button>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant mb-3 ml-4">Docente</label>
+<div class="flex gap-2 items-center">
+<div class="flex-1 flex gap-2 overflow-x-auto custom-scrollbar pb-1">
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Prof. Rodríguez</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Prof. Martínez</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Prof. Smith</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-xs font-medium border border-white/5 whitespace-nowrap hover:bg-surface-bright transition-colors" type="button">Prof. Correa</button>
+</div>
+<button class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-surface-container-high border border-white/5 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-sm">person_search</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant mb-2 ml-4">Hora Inicio</label>
+<input class="w-full bg-surface-container-high border-none rounded-2xl px-6 py-4 text-on-surface focus:ring-2 focus:ring-primary" type="text" value="8:30 AM"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant mb-2 ml-4">Hora Fin</label>
+<input class="w-full bg-surface-container-high border-none rounded-2xl px-6 py-4 text-on-surface focus:ring-2 focus:ring-primary" type="text" value="9:30 AM"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant mb-4 ml-4">Selector de color</label>
+<div class="flex justify-between px-2">
+<button class="w-10 h-10 rounded-full bg-[#7F77DD] ring-offset-4 ring-offset-surface-container ring-2 ring-primary" type="button"></button>
+<button class="w-10 h-10 rounded-full bg-[#BA7517]" type="button"></button>
+<button class="w-10 h-10 rounded-full bg-[#1D9E75]" type="button"></button>
+<button class="w-10 h-10 rounded-full bg-[#D4537E]" type="button"></button>
+<button class="w-10 h-10 rounded-full bg-[#378ADD]" type="button"></button>
+<button class="w-10 h-10 rounded-full bg-[#8D85F6]" type="button"></button>
+</div>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container py-5 rounded-full font-bold text-on-primary mt-4 shadow-lg shadow-primary/20" type="button">Guardar clase</button>
+</form>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-4 pb-8 z-[60]">
+<div class="fixed bottom-6 left-4 right-4 rounded-full h-20 bg-[#020d27]/80 backdrop-blur-xl border border-white/10 shadow-[0_20_40px_rgba(0,0,0,0.4)] flex justify-around items-center px-6">
+<button class="flex flex-col items-center justify-center text-slate-400 p-2 hover:text-[#aaa4ff] transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium uppercase tracking-wider mt-1">Inicio</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 p-2 hover:text-[#aaa4ff] transition-colors">
+<span class="material-symbols-outlined">menu</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium uppercase tracking-wider mt-1">Menú</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-gradient-to-br from-[#aaa4ff] to-[#9b94ff] text-white rounded-full p-4 shadow-[0_0_15px_rgba(170,164,255,0.3)] scale-110 -translate-y-2">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium uppercase tracking-wider mt-0.5">Horario</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 p-2 hover:text-[#aaa4ff] transition-colors">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium uppercase tracking-wider mt-1">Plataformas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 p-2 hover:text-[#aaa4ff] transition-colors">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium uppercase tracking-wider mt-1">Nutrición</span>
+</button>
+</div>
+</nav>
+</body></html>
